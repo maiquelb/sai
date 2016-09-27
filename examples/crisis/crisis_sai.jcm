@@ -1,0 +1,29 @@
+/* 
+
+    JaCaMo Project File 
+    
+    This file defines the initial state of the MAS (initial agents, environment, organisation, ....)
+    
+    (see below the documentation about what can be defined in this file)
+
+*/
+
+mas mayor {
+
+    
+         
+    workspace wsp_sai {          
+          artifact sai: sai.bridges.jacamo.ConstitutiveArt( "crisis","src/constitutive.sai")
+          artifact sai_norms : sai.bridges.jacamo.SaiNormArt("crisis","src/constitutive.sai","src/normative.sai")
+       }
+        
+
+    // agent source path
+    asl-path: src/agt
+              src/agt/inc
+              
+   
+    platform: cartago("infrastructure")
+    
+}
+

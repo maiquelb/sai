@@ -1,0 +1,104 @@
+/*
+    JaCaMo Project for the house building scenario used
+    initially in the Multi-Agent Programming Tutorial @ EASSS 2010
+
+*/
+
+mas house_building {
+
+   /*agent teste{   	
+   	focus: wsp_sai.sai
+   }
+   */
+
+   agent giacomo{        // the agent that wants to build a house
+      focus: wsp_sai.sai       
+      focus: ora4mas.auction_for_SitePreparation  	
+      focus: ora4mas.auction_for_Floors
+      focus: ora4mas.auction_for_Walls
+      focus: ora4mas.auction_for_Roof
+      focus: ora4mas.auction_for_WindowsDoors
+      focus: ora4mas.auction_for_Plumbing
+      focus: ora4mas.auction_for_ElectricalSystem
+      focus: ora4mas.auction_for_Painting
+      focus: ora4mas.housegui
+      focus: ora4mas.clock
+   }        
+   
+   agent companyB{
+   	  focus: wsp_sai.sai       
+      focus: ora4mas.auction_for_SitePreparation
+      focus: ora4mas.housegui  	
+   }
+   agent companyC {
+   	  instances:   3
+      focus: wsp_sai.sai       
+      focus: ora4mas.auction_for_SitePreparation  	
+      focus: ora4mas.auction_for_Floors
+      focus: ora4mas.auction_for_Walls
+      focus: ora4mas.auction_for_Roof
+      focus: ora4mas.auction_for_WindowsDoors
+      focus: ora4mas.auction_for_Plumbing
+      focus: ora4mas.auction_for_ElectricalSystem
+      focus: ora4mas.auction_for_Painting
+      focus: ora4mas.housegui
+   }
+   agent companyD{
+   	  instances:   6
+   	  focus: wsp_sai.sai       
+      focus: ora4mas.auction_for_SitePreparation  	
+      focus: ora4mas.auction_for_Floors
+      focus: ora4mas.auction_for_Walls
+      focus: ora4mas.auction_for_Roof
+      focus: ora4mas.auction_for_WindowsDoors
+      focus: ora4mas.auction_for_Plumbing
+      focus: ora4mas.auction_for_ElectricalSystem
+      focus: ora4mas.auction_for_Painting
+      focus: ora4mas.housegui
+   }
+   agent companyE{
+   	  focus: wsp_sai.sai       
+      focus: ora4mas.auction_for_Floors
+      focus: ora4mas.auction_for_Walls
+      focus: ora4mas.auction_for_Roof
+      focus: ora4mas.housegui
+   }
+   
+   agent companyA{      // builder agents (see their code for details)
+      focus: wsp_sai.sai       
+      focus: ora4mas.auction_for_Plumbing
+      focus: ora4mas.housegui      
+   }   
+   
+   workspace wsp_sai {          
+          artifact sai: sai4jacamo.Sai4JacamoArt( "src/normative.sai","src/constitutive.sai")
+   }
+   
+   workspace ora4mas{
+   	   artifact auction_for_SitePreparation: tools.AuctionArt("SitePreparation", 2000)// 2000 is the maximum value I can pay for the task
+       artifact auction_for_Floors: tools.AuctionArt("Floors", 1000)
+       artifact auction_for_Walls: tools.AuctionArt("Walls", 1000)
+       artifact auction_for_Roof: tools.AuctionArt("Roof", 2000)
+       artifact auction_for_WindowsDoors: tools.AuctionArt("WindowsDoors", 2500)
+       artifact auction_for_Plumbing: tools.AuctionArt("Plumbing", 500)
+       artifact auction_for_ElectricalSystem: tools.AuctionArt("ElectricalSystem", 500)
+       artifact auction_for_Painting: tools.AuctionArt("Painting", 1200)
+       artifact housegui : simulator.House
+       artifact clock: tools.Clock
+       
+   }
+   
+   asl-path:  src/asl
+   
+   class-path:  lib
+   
+   platform: cartago("infrastructure")
+    
+}
+
+
+   
+
+   
+   
+

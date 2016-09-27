@@ -1,0 +1,22 @@
+institution_id : bhInst.
+
+status_functions:
+
+agents: window_fitter, house_owner, roofer, site_prep_contractor, electrician, plumber, painter, door_fitter, soc, building_company, bricklayer.
+
+events: site_prepared, windows_fitted, exterior_painted, roof_built, contract, doors_fitted, floors_laid, interior_painted, plumbing_installed, walls_built, house_built, electrical_system_installed, communicate(Sender,Target).
+
+states:  formationStatusOk(house_group).
+
+
+norms:
+1:  formationStatusOk(house_group): site_prep_contractor obliged site_prepared.
+3:  site_prepared : bricklayer obliged  floors_laid.
+4:  floors_laid: bricklayer obliged  walls_built.
+5:  walls_built: door_fitter obliged doors_fitted.
+6:  walls_built: window_fitter obliged windows_fitted until formationStatusOk(house_group).
+7:  walls_built: roofer obliged roof_built.
+8:  windows_fitted & doors_fitted: plumber obliged plumbing_installed.
+9:  windows_fitted & doors_fitted: electrician obliged electrical_system_installed.
+10: windows_fitted & doors_fitted: painter obliged exterior_painted.
+11: electrical_system_installed & exterior_painted: painter obliged interior_painted.

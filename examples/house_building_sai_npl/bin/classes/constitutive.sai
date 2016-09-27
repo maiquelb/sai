@@ -1,0 +1,181 @@
+/**/
+institution_id : bhInst.
+
+
+status_functions:
+
+agents: house_owner, site_prep_contractor, bricklayer, roofer, window_fitter, door_fitter, plumber, electrician, painter.
+
+events: to_bid(Value), site_teste.
+
+states: achieved(S,G,A), play(A,R,G), committed(A,Mission,S), formationStatusOk(house_group), responsible(G,S).
+
+
+
+
+constitutive_rules:
+
+1: giacomo count-as house_owner.
+
+ 
+2: Agent count-as site_prep_contractor
+   while currentWinner(auction_for_SitePreparation,Agent)&
+         nticks(clock,Time)&(Time>5000).
+
+
+2: Agent count-as bricklayer
+   while currentWinner(auction_for_Floors,Agent)&
+         nticks(clock,Time)&(Time>5000).
+
+
+2: Agent count-as bricklayer
+   while currentWinner(auction_for_Walls,Agent)&
+         nticks(clock,Time)&(Time>5000).
+
+2: Agent count-as roofer
+   while currentWinner(auction_for_Roof,Agent)&
+         nticks(clock,Time)&(Time>5000).
+
+2: Agent count-as window_fitter
+   while currentWinner(auction_for_WindowsDoors,Agent)&
+         nticks(clock,Time)&(Time>5000).
+
+
+2: Agent count-as door_fitter
+   while currentWinner(auction_for_WindowsDoors,Agent)&
+         nticks(clock,Time)&(Time>5000).
+
+2: Agent count-as plumber
+   while currentWinner(auction_for_Plumbing,Agent)&
+         nticks(clock,Time)&(Time>5000).
+
+2: Agent count-as electrician
+   while currentWinner(auction_for_ElectricalSystem,Agent)&
+         nticks(clock,Time)&(Time>5000).
+
+2: Agent count-as painter
+   while currentWinner(auction_for_Painting,Agent)&
+         nticks(clock,Time)&(Time>5000).
+
+
+/*2: count-as play(A,R,"hsh_group")
+   while (A is R)&
+         (R==house_owner|R==site_prep_contractor|site_prep_contractor|R==bricklayer|R==roofer|R==window_fitter|R==door_fitter|R==plumber|R==electrician|R==painter).
+*/
+
+2: count-as play(A,house_owner,"hsh_group")
+   while (A is house_owner).
+
+2: count-as play(A,site_prep_contractor,"hsh_group")
+   while (A is site_prep_contractor).
+
+2: count-as play(A,bricklayer,"hsh_group")
+   while (A is bricklayer).
+
+2: count-as play(A,roofer,"hsh_group")
+   while (A is roofer).
+
+2: count-as play(A,window_fitter,"hsh_group")
+   while (A is window_fitter).
+
+2: count-as play(A,door_fitter,"hsh_group")
+   while (A is door_fitter).
+
+2: count-as play(A,plumber,"hsh_group")
+   while (A is plumber).
+
+2: count-as play(A,electrician,"hsh_group")
+   while (A is electrician).
+
+2: count-as play(A,painter,"hsh_group")
+   while (A is painter).
+
+
+
+2: count-as committed(A,management_of_house_building,"bhsch")
+   while (A is house_owner)&(AnyState is formationStatusOk(house_group)).
+
+2: count-as committed(A,prepare_site,"bhsch")
+   while (A is site_prep_contractor)&(AnyState is formationStatusOk(house_group)).
+
+2: count-as committed(A,lay_floors,"bhsch")
+   while (A is bricklayer)&(AnyState is formationStatusOk(house_group)).
+
+2: count-as committed(A,build_walls,"bhsch")
+   while (A is bricklayer)&(AnyState is formationStatusOk(house_group)).
+
+2: play(A,roofer,"hsh_group")
+   count-as committed(A,build_roof,"bhsch")
+   while (AnyState is formationStatusOk(house_group)).
+
+2: count-as committed(A,fit_windows,"bhsch")
+   while (A is window_fitter)&(AnyState is formationStatusOk(house_group)).
+
+2: count-as committed(A,fit_doors,"bhsch")
+   while (A is door_fitter)&(AnyState is formationStatusOk(house_group)).
+
+2: count-as committed(A,install_plumbing,"bhsch")
+   while (A is plumber)&(AnyState is formationStatusOk(house_group)).
+
+2: count-as committed(A,install_electrical_system,"bhsch")
+   while (A is electrician)&(AnyState is formationStatusOk(house_group)).
+
+2: count-as committed(A,paint_house,"bhsch")
+   while (A is painter)&(AnyState is formationStatusOk(house_group)).
+
+
+
+2: count-as formationStatusOk(house_group)
+    while (Electrician1 is electrician)  &  not((Electrician2 is electrician) & not(Electrician1==Electrician2)) &
+          (Site_prep_contractor1 is site_prep_contractor) &  not((Site_prep_contractor2 is site_prep_contractor) & not(Site_prep_contractor1==Site_prep_contractor2))&
+          (Bricklayer1 is bricklayer) & (Bricklayer2 is bricklayer) &  not((Bricklayer3 is bricklayer) & not(Bricklayer1==Bricklayer2) & not(Bricklayer2==Bricklayer3))&
+	  (Plumber1 is plumber)  &  not((Plumber2 is plumber) & not(Plumber1==Plumber2)) &
+          (Window_fitter1 is window_fitter) &  not((Window_fitter2 is window_fitter) & not(Window_fitter1==Window_fitter2))&
+          (Door_fitter1 is door_fitter)& not((Door_fitter2 is door_fitter) & not(Door_fitter1==Door_fitter2)) &
+          (Roofer1 is roofer) &  not((Roofer2 is roofer) & not(Roofer1==Roofer2))&
+          (House_owner1 is house_owner) &  not((House_owner2 is house_owner) & not(House_owner1==House_owner2)).
+
+
+3: formationStatusOk(house_group)
+   count-as responsible("hsh_group","bhsch").
+
+
+/*
+2: count-as formationStatusOk(house_group)
+    while (Electrician1 is electrician)  &  not((Electrician2 is electrician) & not(Electrician1==Electrician2)).
+  
+*/
+
+
+1: count-as achieved("bhsch",site_prepared,Agent)
+   when prepareSite[sai__agent(Agent)].
+
+2: count-as achieved("bhsch",electrical_system_installed,Agent)
+   when installElectricalSystem[sai__agent(Agent)].
+
+3: count-as achieved("bhsch",floors_laid,Agent)
+   when layFloors[sai__agent(Agent)].
+
+4: count-as achieved("bhsch",walls_built,Agent)
+   when buildWalls[sai__agent(Agent)].
+
+4: count-as achieved("bhsch",roof_built,Agent)
+   when buildRoof[sai__agent(Agent)].
+
+4: count-as achieved("bhsch",windows_fitted,Agent)
+   when fitWindows[sai__agent(Agent)].
+
+4: count-as achieved("bhsch",doors_fitted,Agent)
+   when fitDoors[sai__agent(Agent)].
+
+4: count-as achieved("bhsch",plumbing_installed,Agent)
+   when installPlumbing[sai__agent(Agent)].
+
+4: count-as achieved("bhsch",electrical_system_installed,Agent)
+   when installElectricalSystem[sai__agent(Agent)].
+
+4: count-as achieved("bhsch",exterior_painted,Agent)
+   when paintExterior[sai__agent(Agent)].
+
+4: count-as achieved("bhsch",interior_painted,Agent)
+   when paintInterior[sai__agent(Agent)].

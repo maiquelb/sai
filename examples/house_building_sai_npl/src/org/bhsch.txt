@@ -1,0 +1,187 @@
+scope organisation(bhsch) { 
+
+   mission_cardinality(build_walls,1,1).
+   mission_cardinality(fit_doors,1,1).
+   mission_cardinality(fit_windows,1,1).
+   mission_cardinality(management_of_house_building,1,1).
+   mission_cardinality(build_roof,1,1).
+   mission_cardinality(paint_house,1,1).
+   mission_cardinality(install_electrical_system,1,1).
+   mission_cardinality(prepare_site,1,1).
+   mission_cardinality(lay_floors,1,1).
+   mission_cardinality(install_plumbing,1,1).
+
+
+   mission_goal(build_walls,walls_built).
+   mission_goal(fit_doors,doors_fitted).
+   mission_goal(fit_windows,windows_fitted).
+   mission_goal(management_of_house_building,house_built).
+   mission_goal(build_roof,roof_built).
+   mission_goal(paint_house,exterior_painted).
+   mission_goal(paint_house,interior_painted).
+   mission_goal(install_electrical_system,electrical_system_installed).
+   mission_goal(prepare_site,site_prepared).
+   mission_goal(lay_floors,floors_laid).
+   mission_goal(install_plumbing,plumbing_installed).
+
+   goal([paint_house],exterior_painted,dep(and,[rwd]),achievement,all,`20 minutes`).
+   goal([prepare_site],site_prepared,dep(and,[]),achievement,all,`20 minutes`).
+   goal([install_plumbing],plumbing_installed,dep(and,[rwd]),achievement,all,`20 minutes`).
+   goal([management_of_house_building],house_built,dep(and,[interior_painted]),achievement,all,`1 year`).
+   goal([build_roof],roof_built,dep(and,[walls_built]),achievement,all,`30 minutes`).
+   goal([build_walls],walls_built,dep(and,[floors_laid]),achievement,all,`40 minutes`).
+   goal([],pee,dep(and,[plumbing_installed, electrical_system_installed, exterior_painted]),achievement,0,`1 year`).
+   goal([lay_floors],floors_laid,dep(and,[site_prepared]),achievement,all,`25 minutes`).
+   goal([fit_windows],windows_fitted,dep(and,[walls_built]),achievement,all,`10 minutes`).
+   goal([paint_house],interior_painted,dep(and,[pee]),achievement,all,`30 minutes`).
+   goal([],rwd,dep(and,[roof_built, windows_fitted, doors_fitted]),achievement,0,`1 year`).
+   goal([install_electrical_system],electrical_system_installed,dep(and,[rwd]),achievement,all,`20 minutes`).
+   goal([fit_doors],doors_fitted,dep(and,[walls_built]),achievement,all,`10 minutes`).
+   super_goal(pee, exterior_painted).
+   super_goal(house_built, site_prepared).
+   super_goal(pee, plumbing_installed).
+   super_goal(rwd, roof_built).
+   super_goal(house_built, walls_built).
+   super_goal(house_built, pee).
+   super_goal(house_built, floors_laid).
+   super_goal(rwd, windows_fitted).
+   super_goal(house_built, interior_painted).
+   super_goal(house_built, rwd).
+   super_goal(pee, electrical_system_installed).
+   super_goal(rwd, doors_fitted).
+
+   mplayers(M,S,V) :- .count(committed(_,M,S),V).
+   well_formed(S) :- 
+      (mission_accomplished(S,build_walls) | mplayers(build_walls,S,Vbuild_walls) & Vbuild_walls >= 1 & Vbuild_walls <= 1) &
+      (mission_accomplished(S,fit_doors) | mplayers(fit_doors,S,Vfit_doors) & Vfit_doors >= 1 & Vfit_doors <= 1) &
+      (mission_accomplished(S,fit_windows) | mplayers(fit_windows,S,Vfit_windows) & Vfit_windows >= 1 & Vfit_windows <= 1) &
+      (mission_accomplished(S,management_of_house_building) | mplayers(management_of_house_building,S,Vmanagement_of_house_building) & Vmanagement_of_house_building >= 1 & Vmanagement_of_house_building <= 1) &
+      (mission_accomplished(S,build_roof) | mplayers(build_roof,S,Vbuild_roof) & Vbuild_roof >= 1 & Vbuild_roof <= 1) &
+      (mission_accomplished(S,paint_house) | mplayers(paint_house,S,Vpaint_house) & Vpaint_house >= 1 & Vpaint_house <= 1) &
+      (mission_accomplished(S,install_electrical_system) | mplayers(install_electrical_system,S,Vinstall_electrical_system) & Vinstall_electrical_system >= 1 & Vinstall_electrical_system <= 1) &
+      (mission_accomplished(S,prepare_site) | mplayers(prepare_site,S,Vprepare_site) & Vprepare_site >= 1 & Vprepare_site <= 1) &
+      (mission_accomplished(S,lay_floors) | mplayers(lay_floors,S,Vlay_floors) & Vlay_floors >= 1 & Vlay_floors <= 1) &
+      (mission_accomplished(S,install_plumbing) | mplayers(install_plumbing,S,Vinstall_plumbing) & Vinstall_plumbing >= 1 & Vinstall_plumbing <= 1).
+   is_finished(S) :- satisfied(S,house_built).
+   mission_accomplished(S,M) :- .findall(Goal, mission_goal(M,Goal), MissionGoals) & all_satisfied(S,MissionGoals).
+   all_satisfied(_,[]).
+   all_satisfied(S,[G|T]) :- satisfied(S,G) & all_satisfied(S,T).
+   any_satisfied(S,[G|_]) :- satisfied(S,G).
+   any_satisfied(S,[_|T]) :- any_satisfied(S,T).
+
+   enabled(S,G) :- goal(_, G,  dep(or,PCG), _, NP, _) & NP \== 0 & any_satisfied(S,PCG).
+   enabled(S,G) :- goal(_, G, dep(and,PCG), _, NP, _) & NP \== 0 & all_satisfied(S,PCG).
+   super_satisfied(S,G) :- super_goal(SG,G) & satisfied(S,SG).
+
+
+
+
+   satisfied(S,G) :- goal([],G,dep(and,PCG),_,0,_) & all_satisfied(S,PCG). 
+   satisfied(S,G) :- goal([],G,dep(or,PCG),_,0,_) & any_satisfied(S,PCG). 
+   satisfied(S,G) :- goal([M],G,_,_,all,_) & mplayers(M,S,V)  & .count(achieved(S,G,A),AA) & AA >= V & AA > 0.
+   satisfied(S,G) :- goal(_,G,_,_,X,_)  & X > 0 & .count( achieved(S,G,A), X ).
+
+   mission_accomplished(S,M):- (.findall(Goal,mission_goal(M,Goal),MissionGoals) & all_satisfied(S,MissionGoals)).
+
+   norm n1: 
+           responsible(Gr,S) &
+           mplayers(management_of_house_building,S,V) & 
+           fplay(A,house_owner,Gr) &
+           not mission_accomplished(S,management_of_house_building)
+        -> obligation(A,n1,committed(A,management_of_house_building,S),  9223372036854775807).
+   norm n2: 
+           responsible(Gr,S) &
+           mplayers(prepare_site,S,V) & V < 1 &
+           fplay(A,site_prep_contractor,Gr) &
+           not mission_accomplished(S,prepare_site) 
+        -> obligation(A,n2,committed(A,prepare_site,S),  9223372036854775807).
+   norm n3: 
+           responsible(Gr,S) &
+           mplayers(lay_floors,S,V) & V < 1 &
+           fplay(A,bricklayer,Gr) &
+           not mission_accomplished(S,lay_floors) 
+        -> obligation(A,n3,committed(A,lay_floors,S),  9223372036854775807).
+   norm n4: 
+           responsible(Gr,S) &
+           mplayers(build_walls,S,V) & V < 1 &
+           fplay(A,bricklayer,Gr) &
+           not mission_accomplished(S,build_walls)
+        -> obligation(A,n4,committed(A,build_walls,S),  9223372036854775807).
+   norm n5: 
+           responsible(Gr,S) &
+           mplayers(build_roof,S,V) & V < 1 &
+           fplay(A,roofer,Gr) &
+           not mission_accomplished(S,build_roof)
+        -> obligation(A,n5,committed(A,build_roof,S),  9223372036854775807).
+   norm n6: 
+           responsible(Gr,S) &
+           mplayers(fit_windows,S,V) & V < 1 &
+           fplay(A,window_fitter,Gr) &
+           not mission_accomplished(S,fit_windows) 
+        -> obligation(A,n6,committed(A,fit_windows,S),  9223372036854775807).
+   norm n7: 
+           responsible(Gr,S) &
+           mplayers(fit_doors,S,V) & V < 1 &
+           fplay(A,door_fitter,Gr) &
+           not mission_accomplished(S,fit_doors)
+        -> obligation(A,n7,committed(A,fit_doors,S),  9223372036854775807).
+   norm n8: 
+           responsible(Gr,S) &
+           mplayers(install_plumbing,S,V) & V < 1 &
+           fplay(A,plumber,Gr) &
+           not mission_accomplished(S,install_plumbing) 
+        -> obligation(A,n8,committed(A,install_plumbing,S),  9223372036854775807).
+   norm n9: 
+           responsible(Gr,S) &
+           mplayers(install_electrical_system,S,V) & V < 1 &
+           fplay(A,electrician,Gr) &
+           not mission_accomplished(S,install_electrical_system)
+        -> obligation(A,n9,committed(A,install_electrical_system,S),  9223372036854775807).
+   norm n10: 
+           responsible(Gr,S) &
+           mplayers(paint_house,S,V) & V < 1 &
+           fplay(A,painter,Gr) &
+           not mission_accomplished(S,paint_house)
+        -> obligation(A,n10,committed(A,paint_house,S),  9223372036854775807).
+
+   norm ngoal: 
+           committed(A,M,S) & mission_goal(M,G) &
+           well_formed(S) & not satisfied(S,G) & enabled(S,G) & 
+           not super_satisfied(S,G)
+        -> obligation(A,ngoal(S,M,G),achieved(S,G,A), 9223372036854775807).
+
+
+   norm goal_non_compliance: 
+           obligation(Agt,ngoal(S,M,G),Obj,TTF) &
+           not Obj &
+           `now` > TTF
+        -> fail(goal_non_compliance(obligation(Agt,ngoal(S,M,G),Obj,TTF))).
+   norm mission_permission: 
+           committed(Agt,M,S) &
+           not (mission_role(M,R) &
+           responsible(Gr,S) &
+           fplay(Agt,R,Gr))
+        -> fail(mission_permission(Agt,M,S)).
+   norm mission_left: 
+           leaved_mission(Agt,M,S) &
+           not mission_accomplished(S,M)
+        -> fail(mission_left(Agt,M,S)).
+   norm mission_cardinality: 
+           scheme_id(S) &
+           mission_cardinality(M,_,MMax) &
+           mplayers(M,S,MP) &
+           MP > MMax
+        -> fail(mission_cardinality(M,S,MP,MMax)).
+   norm ach_not_enabled_goal: 
+           achieved(S,G,Agt) &
+           mission_goal(M,G) &
+           not mission_accomplished(S,M) &
+           not enabled(S,G)
+        -> fail(ach_not_enabled_goal(S,G,Agt)).
+   norm ach_not_committed_goal: 
+           achieved(S,G,Agt) &
+           .findall(M, mission_goal(M,G) &
+           (committed(Agt,M,S) | mission_accomplished(S,M)), [])
+        -> fail(ach_not_committed_goal(S,G,Agt)).
+}
+

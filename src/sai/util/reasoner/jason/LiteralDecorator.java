@@ -1,0 +1,42 @@
+package sai.util.reasoner.jason;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import jason.asSyntax.Literal;
+import jason.asSyntax.Term;
+
+public abstract class LiteralDecorator extends Literal {
+
+	protected Literal literal;
+	
+
+	@Override
+	public Element getAsDOM(Document arg0) {	
+		return literal.getAsDOM(arg0);
+	}
+
+	@Override
+	public String getFunctor() {
+		return literal.getFunctor();
+	}
+	
+	@Override
+	protected int calcHashCode() {
+		return literal.hashCode();
+	}
+
+	@Override
+	public Term clone() {
+		return literal.clone();
+	}
+
+	@Override
+	public String toString() {
+		return literal.toString();
+	}
+
+	
+	
+
+}

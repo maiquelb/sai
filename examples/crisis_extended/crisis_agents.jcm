@@ -1,0 +1,48 @@
+/* 
+
+    
+   - launches the artificial agents of the project. Can be launched it by the JaCaMo Eclipse plugin. 
+	
+
+*/
+
+mas crisis_agents {
+	
+	/*agent infra{
+    	focus: wsp_mayor.table_mayor @ node_mayor
+        focus: wsp_gis.crisis_parameters  @node_gis   	    	
+    	focus: wsp_fire_brigade.table_fire_brigade @ node_fire_brigade
+    	focus: wsp_sai.sai @ node_sai
+    	focus: wsp_teste.teste @ node_teste
+    }*/
+
+    
+    agent communicator{
+    	focus: wsp_mayor.table_mayor @ node_mayor
+    	focus: wsp_fire_brigade.table_fire_brigade @ node_fire_brigade
+    	focus: wsp_sai.sai @ node_sai
+    }
+    
+    agent regulator{
+    	focus: wsp_sai.sai @ node_sai
+    	focus: wsp_mayor.table_mayor @ node_mayor
+    	focus: wsp_fire_brigade.table_fire_brigade @ node_fire_brigade
+    }	
+    
+	
+	
+       
+     node node_sai running @ 127.0.0.1
+     node node_mayor running @ 127.0.0.1
+     node node_fire_brigade running @ 127.0.0.1
+     node node_gis running @ 127.0.0.1
+     node node_test running @ 127.0.0.1
+
+    // java class path
+    class-path:  lib
+   
+    // agent source path
+    asl-path: src/agt
+              src/agt/inc
+                            
+}
