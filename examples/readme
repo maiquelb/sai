@@ -1,7 +1,0 @@
-- crisis: an example on crisis management scenario using a simplified normative model.
-- crisis_npl: an example on crisis management scenario using the NPL normative model
-- crisis_pav: an example on crisis management scenario using the the normative model of Panagiotidi et al.
-- house_building_sai_npl: the house building example without Moise. Norms are in NPL
-- house_building_sai_npl_full: an extended version of the house_building_sai_npl. In this example, a more complete set of elements of Moise semantics is considered as status functions (e.g. all_satisfied, mission_role)
-- house_building_sai_nopl: the house building example using Moise. The dynamic organizational facts are constituted from the environment.
-
