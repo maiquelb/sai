@@ -2,6 +2,7 @@ package sai.util.reasoner.jason;
 
 import jason.asSemantics.Agent;
 import jason.asSemantics.Unifier;
+import jason.asSyntax.Atom;
 import jason.asSyntax.Literal;
 import jason.asSyntax.parser.ParseException;
 
@@ -45,6 +46,9 @@ public class VerifiableConsequenceLiteral extends LiteralDecorator {
 		//return l.logicalConsequence(ag, new Unifier()).hasNext();
 		return parseLiteral(l.toString()).logicalConsequence(ag, new Unifier()).hasNext();
 	}
+
+
+
 }
 
 

@@ -33,10 +33,8 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 	private List<String>       futureSchemes = new LinkedList<String>(); // schemes to be responsible to when well formed - from superclass - should be protected there
 
 	@Override
-	public void init(String osFile, String grType, boolean createMonitoring,
-			boolean hasGUI) throws ParseException, MoiseException,
-			OperationException {
-		super.init(osFile, grType, createMonitoring, hasGUI);
+	public void init(final String osFile, final String grType) throws ParseException, MoiseException, OperationException {
+		super.init(osFile, grType);
 
 		this.npl2sai = new NOpl2Sai(getNPLInterpreter());
 		this.npl2sai.addGroupListener(this);

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 
+import npl.DeonticModality;
 import npl.DynamicFactsProvider;
 import npl.LiteralFactory;
 import npl.NPLInterpreter;
@@ -329,7 +330,7 @@ public class SaiNplArt extends Artifact implements npl.NormativeListener  {
 
 
 	@Override
-	public void created(Structure o) {
+	public void created(DeonticModality o) {
 		o.delAnnot(o.getAnnot("created"));		
 		execInternalOp("internal_created", o);
 		if(!obligationsToShow.contains(o)){
@@ -355,7 +356,7 @@ public class SaiNplArt extends Artifact implements npl.NormativeListener  {
 	}
 
 	@Override
-	public void fulfilled(Structure o) {
+	public void fulfilled(DeonticModality o) {
 		o.delAnnot(o.getAnnot("done"));
 		o.delAnnot(o.getAnnot("fulfilled"));
 		execInternalOp("internal_fulfilled", o);
@@ -375,25 +376,25 @@ public class SaiNplArt extends Artifact implements npl.NormativeListener  {
 	}
 
 	@INTERNAL_OPERATION
-	void internal_fulfilled(Structure o){
+	void internal_fulfilled(DeonticModality o){
 		removeObsPropertyByTemplate("obligation", o.getTerm(0), o.getTerm(1), o.getTerm(2), o.getTerm(3));
 		defineObsProperty(o.getFunctor(), o.getTerms());		
 	}
 
 	@Override
-	public void unfulfilled(Structure o) {
+	public void unfulfilled(DeonticModality o) {
 		execInternalOp("internal_unfulfilled", o);		
 	}
 
 
 	@INTERNAL_OPERATION
-	void internal_unfulfilled(Structure o){
+	void internal_unfulfilled(DeonticModality o){
 		removeObsPropertyByTemplate("obligation", o.getTerm(0), o.getTerm(1), o.getTerm(2), o.getTerm(3));
 		defineObsProperty(o.getFunctor(), o.getTerms());		
 	}
 
 	@Override
-	public void inactive(Structure o) {
+	public void inactive(DeonticModality o) {
 		o.delAnnot(o.getAnnot("inactive"));
 		execInternalOp("internal_inactive", o);
 		Literal toRemove = null;
@@ -412,7 +413,7 @@ public class SaiNplArt extends Artifact implements npl.NormativeListener  {
 	}
 	
 	@INTERNAL_OPERATION
-	void internal_inactive(Structure o){
+	void internal_inactive(DeonticModality o){
 		removeObsPropertyByTemplate("obligation", o.getTerm(0), o.getTerm(1), o.getTerm(2), o.getTerm(3));
 		defineObsProperty(o.getFunctor(), o.getTerms());		
 	}

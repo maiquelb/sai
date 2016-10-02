@@ -3,6 +3,7 @@ package sai.util.reasoner.jason;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import jason.asSyntax.Atom;
 import jason.asSyntax.Literal;
 import jason.asSyntax.Term;
 
@@ -37,6 +38,15 @@ public abstract class LiteralDecorator extends Literal {
 	}
 
 	
-	
+	@Override
+	public Literal cloneNS(Atom newnamespace) {
+		return literal.cloneNS(newnamespace);
+	}
+
+
+	@Override
+	public Atom getNS() {
+		return literal.getNS();
+	}
 
 }

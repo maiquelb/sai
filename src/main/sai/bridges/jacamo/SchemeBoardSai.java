@@ -29,6 +29,7 @@ import moise.common.MoiseException;
 import npl.NormativeFailureException;
 import npl.parser.ParseException;
 import ora4mas.nopl.JasonTermWrapper;
+import ora4mas.nopl.Operation;
 import ora4mas.nopl.SchemeBoard;
 import ora4mas.nopl.oe.CollectiveOE;
 import ora4mas.nopl.oe.Scheme;
@@ -46,12 +47,11 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 
 	@Override
-	public void init(String osFile, String schType, boolean createMonitoring,
-			boolean hasGUI) throws ParseException, MoiseException {
-		super.init(osFile, schType, createMonitoring, hasGUI);		
+	public void init(final String osFile, final String schType) throws ParseException, MoiseException {
+		super.init(osFile, schType);		
 
 		this.npl2sai = new NOpl2Sai(getNPLInterpreter());
-		//this.npl2sai.addListener(this);
+	
 		this.npl2sai.addSchemeListener(this);
 
 
@@ -68,10 +68,6 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 
 
-
-
-
-
 	@Override
 	public void sai_goalAchieved(String agent, String goal) {		
 		synchronized (achievementsList) {
@@ -82,27 +78,47 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 
 
-	private Scheme getSchState() {
+	public Scheme getSchState() {
 		return (Scheme)orgState;
 	}
 
-	private void updateMonitorScheme() throws CartagoException {
+	/*private void updateMonitorScheme() throws CartagoException {
 		if (monitorSchArt != null) {
 			execLinkedOp(monitorSchArt, "updateMonitoredScheme", orgState);
 		}
-	}
+	}*/
 
 	@INTERNAL_OPERATION
 	void internal_goalAchieved(String agent, String goal){
 		try {	
-			this.goalAchieved(agent, goal);
+			this.goalDone(agent, goal);
 		} catch (CartagoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/*This method is a copy from the superclass.
+	 * TODO: (?) make this method protected in the superclass?
+	 * */
+	private void goalDone(final String agent, final String goal) throws CartagoException {
+        ora4masOperationTemplate(new Operation() {
+            public void exec() throws NormativeFailureException, Exception {
+                getSchState().addDoneGoal(agent, goal);
+                nengine.verifyNorms();
+                if (getSchState().computeSatisfiedGoals()) { // add satisfied goals
+                    //nengine.setDynamicFacts(orgState.transform());        
+                    nengine.verifyNorms();
+                }
+                //updateMonitorScheme();
+    
+                updateGoalStateObsProp();
+            }
+        },"Error achieving goal "+goal);
+    }
 
-	private void goalAchieved(String agent, String goal) throws CartagoException {
+	/*private void goalAchieved(String agent, String goal) throws CartagoException {
 		if (!running) return;
 		CollectiveOE bak = orgState.clone();
 		getSchState().addGoalAchieved(agent, goal);		
@@ -126,7 +142,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 		}
 	}
 
-
+*/
 
 
 	@Override
@@ -150,31 +166,23 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 		}
 	}
 
-	private void commitMission(String ag, String mission) throws CartagoException {
-		if (!running) return;
-		CollectiveOE bak = orgState.clone();        
-		orgState.addPlayer(ag, mission);
-		try {
-			nengine.verifyNorms();
-
-			defineObsProperty(obsPropCommitment, 
-					new JasonTermWrapper(ag), 
-					new JasonTermWrapper(mission), 
-					this.getId().getName());
-			updateGoalStateObsProp();
-
-			updateMonitorScheme();
-			updateGuiOE();
-		} catch (NormativeFailureException e) {
-			orgState = bak; // takes the backup as the current model since the action failed
-			failed("Error committing to mission "+mission, "reason", new JasonTermWrapper(e.getFail()));
-		} catch (Exception e) {
-			orgState = bak; 
-			failed(e.toString());
-			e.printStackTrace();
-		}
-	}
-
+	private void commitMission(final String ag, final String mission) throws CartagoException {
+        ora4masOperationTemplate(new Operation() {
+            public void exec() throws NormativeFailureException, Exception {
+                orgState.addPlayer(ag, mission);
+                nengine.verifyNorms();
+                
+                defineObsProperty(obsPropCommitment, 
+                        new JasonTermWrapper(ag), 
+                        new JasonTermWrapper(mission), 
+                        new JasonTermWrapper(SchemeBoardSai.this.getId().getName()));
+                updateGoalStateObsProp();
+                
+                //updateMonitorScheme();
+            }
+        }, "Error committing to mission "+mission);
+    }
+    
 
 
 
@@ -273,7 +281,6 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 									toAchieve = nengine.getAg().believes(parseFormula("enabled("+getSchState().getId()+","+c.getGoal()+")"), new Unifier());
 									if(toAchieve){
 										execInternalOp("internal_goalAchieved",c.getAgent(),c.getGoal());
-										//addedAchievement.add(c);
 									}	
 								}
 							} catch (jason.asSyntax.parser.ParseException e) {
