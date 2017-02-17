@@ -106,9 +106,13 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 	//from the superclass - should be protected there
 	private void notifyObservers() throws CartagoException {
 		for (ArtifactId a: schemes) {
+			//log("schemes " + a.getName() + " - " + schemes.size() );
+			//log("schemes getId: " + orgState.getId());
+			//log("schemes getPlayers: " + orgState.getPlayers());
 			execLinkedOp(a, "updateRolePlayers", orgState.getId(), orgState.getPlayers());
 		}
 		for (ArtifactId a: listeners) {
+			//log("listeners " + a.getName() + " - " + listeners.size());
 			execLinkedOp(a, "updateRolePlayers", orgState.getId(), orgState.getPlayers());
 		}
 	}

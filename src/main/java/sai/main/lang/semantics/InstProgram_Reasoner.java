@@ -110,6 +110,8 @@ public class InstProgram_Reasoner extends InstProgram{
 			crule.setM(parseFormula(crule.getM().toString()+"&(sai__is(_,"+crule.getX().toString()+",_))"));
 		}*/
 
+		
+		
 		if((getStatusFunctionByName(crule.getY().toString()) instanceof StateStatusFunction)&&(!crule.getX().isVar())&&(getStatusFunctionByName(crule.getX().toString())==null)){	//if Y is a state status function, the term X is added to the term M, thus it is not necessary add "true" to the term M
 			if(crule.getM()==null||crule.getM().toString()=="true")
 				crule.setM(parseFormula(crule.getX().toString()));
@@ -182,8 +184,8 @@ public class InstProgram_Reasoner extends InstProgram{
 		//rule = rule + crule.getM();
 		rule = rule + FormulaAdapter.adaptFormula( crule.getM().toString().replaceAll("((_)+(\\d+)(Var)?)+", "Var$3"), this);
 		rule = rule + ")";
-
-
+		
+		
 		reasoner.assertValue(rule);
 		return super.addConstitutiveRule(crule);
 	}

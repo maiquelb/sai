@@ -57,6 +57,29 @@ public class FormulaAdapter {
 		return formula;
 	}
 	
+	/*
+	 * If the parameter finalDot is false, then the final dot in the logical formula is removed.
+	 */
+	public static String adaptFormula1(String lformula, Boolean finalDot) throws IOException{
+		InputStream is =  new ByteArrayInputStream(lformula.toString().getBytes());
+		ANTLRInputStream input = new ANTLRInputStream(is);
+		sai_constitutiveLexer constLexer = new sai_constitutiveLexer(input);		
+		CommonTokenStream tokens = new CommonTokenStream(constLexer);
+		sai_constitutiveParser constParser = new sai_constitutiveParser(tokens);
+		ParseTree tree = constParser.sf_formula();
+		//ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
+		FormulaAdapter f = new FormulaAdapter();
+		VisitorTermM v = f.new VisitorTermM(); 
+		v.visitSf_formula((Sf_formulaContext) tree);
+				
+		if(!finalDot)
+			if((formula.charAt(formula.length() - 1))=='.'){
+				formula = formula.substring(formula.length()-1);
+			}
+		
+		return formula;
+	}
+	
 	
 	public static String adaptFormula(LogicalFormula lformula, InstProgram instProgram) throws IOException{
 		InputStream is =  new ByteArrayInputStream(lformula.toString().getBytes());

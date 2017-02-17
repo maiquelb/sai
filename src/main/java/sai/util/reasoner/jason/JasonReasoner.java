@@ -40,7 +40,7 @@ public class JasonReasoner implements IReasoner {
 		gui.addReasoner(this);
 	}
 
-	public synchronized void assertValue(String value) throws RevisionFailedException, ParseException  {
+	public synchronized void assertValue(String value) throws RevisionFailedException, ParseException  {		
 		if(value.indexOf(":-")>-1){ //if the value is a rule
 			assertRule(value);
 		}else{		

@@ -7,6 +7,7 @@ import static jason.asSyntax.ASSyntax.parseFormula;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
@@ -16,8 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import sai.main.institution.INormativeEngine;
+import cartago.ArtifactConfig;
+import cartago.ArtifactId;
 import cartago.CartagoException;
 import cartago.INTERNAL_OPERATION;
+import cartago.LINK;
 import cartago.OPERATION;
 import cartago.OpFeedbackParam;
 import sai.main.lang.semantics.statusFunction.AgentStatusFunction;
@@ -26,13 +30,18 @@ import sai.main.lang.semantics.statusFunction.StateStatusFunction;
 import sai.norms.npl.nopl2sai.IScheme2SaiListener;
 import sai.norms.npl.nopl2sai.NOpl2Sai;
 import moise.common.MoiseException;
+import moise.os.OS;
 import npl.NormativeFailureException;
 import npl.parser.ParseException;
 import ora4mas.nopl.JasonTermWrapper;
+import ora4mas.nopl.NormativeBoard;
 import ora4mas.nopl.Operation;
 import ora4mas.nopl.SchemeBoard;
 import ora4mas.nopl.oe.CollectiveOE;
+import ora4mas.nopl.oe.Group;
+import ora4mas.nopl.oe.Player;
 import ora4mas.nopl.oe.Scheme;
+import ora4mas.nopl.tools.os2nopl;
 
 public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
@@ -42,6 +51,8 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 	private List<Commitment> commitmentsList = new ArrayList<Commitment>();	
 	private List<Goal> achievementsList = new ArrayList<Goal>();
 	private CommitmentChecker commitmentChecker = new CommitmentChecker();
+	
+	private moise.os.fs.Scheme spec; //could be protected in the superclass - requires for method UpdateRolePlayers
 
 
 
@@ -49,12 +60,17 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 	@Override
 	public void init(final String osFile, final String schType) throws ParseException, MoiseException {
 		super.init(osFile, schType);		
+		
+		final OS os = OS.loadOSFromURI(osFile);
+        spec = os.getFS().findScheme(schType);
 
 		this.npl2sai = new NOpl2Sai(getNPLInterpreter());
 	
 		this.npl2sai.addSchemeListener(this);
 
 
+		
+		 
 		commitmentChecker.start();
 	}
 
@@ -78,6 +94,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 
 
+	
 	public Scheme getSchState() {
 		return (Scheme)orgState;
 	}
@@ -147,6 +164,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 	@Override
 	public void sai_committed(String agent, String mission, String scheme) {
+		//log("sai_committed: " + agent + ";" + mission + ";" + scheme);		
 		if(getSchState().getId().equals(scheme.replaceAll("\"", ""))){
 			synchronized (commitmentsList) {
 				commitmentsList.add(new Commitment(agent, mission)); //adds to the list to be consumed by a thread
@@ -160,6 +178,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 	@INTERNAL_OPERATION
 	void internal_commitMission(String agent, String mission){
 		try {
+			//log("internal_commitMission: " + agent + ";" + mission);
 			this.commitMission(agent, mission);
 		} catch (CartagoException e) {
 			e.printStackTrace();
@@ -169,6 +188,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 	private void commitMission(final String ag, final String mission) throws CartagoException {
         ora4masOperationTemplate(new Operation() {
             public void exec() throws NormativeFailureException, Exception {
+            	//log("commitMission starting: " + ag + ";" + mission );
                 orgState.addPlayer(ag, mission);
                 nengine.verifyNorms();
                 
@@ -177,7 +197,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
                         new JasonTermWrapper(mission), 
                         new JasonTermWrapper(SchemeBoardSai.this.getId().getName()));
                 updateGoalStateObsProp();
-                
+                //log("commitMission done: " + ag + ";" + mission );
                 //updateMonitorScheme();
             }
         }, "Error committing to mission "+mission);
@@ -253,12 +273,19 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 					synchronized (commitmentsList) {						
 						for(Commitment c:commitmentsList){
-							try {							 
+							try {
+								//log("commitment checker - " + c.getAgent()+","+c.getMission());
 								toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+getSchState().getId()+"\"),D)[created(_)])"), new Unifier());
 								if(toCommit){
 									execInternalOp("internal_commitMission",c.getAgent(),c.getMission());
 									added.add(c);
-								}					
+								}else{
+									log("do not believe " + parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+getSchState().getId()+"\"),D)[created(_)])"));
+									Iterator<Literal> it =   nengine.getAg().getBB().iterator();
+									while(it.hasNext()){
+										log("iterator: " + it.next());
+									}
+								}
 							} catch (jason.asSyntax.parser.ParseException e) {
 								e.printStackTrace();
 							}

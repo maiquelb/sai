@@ -132,8 +132,8 @@ public class sai_constitutiveListenerImpl extends sai_constitutiveBaseListener{
 				visitor.visitSf_formula(ctx.m().sf_formula());
 				//visitor.visit(ctx.m());				
 				m = parseFormula(visitor.getFormula());	
-			}
-			
+			}			
+			 
 			instProgram.addConstitutiveRule(new ConstitutiveRule(x,y,t,m));
 		} catch (ParseException e) {
 			e.printStackTrace();

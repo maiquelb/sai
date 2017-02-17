@@ -1,11 +1,10 @@
-// Generated from sai_constitutive.g by ANTLR 4.4
+// Generated from sai_constitutive.g by ANTLR 4.6
+
 
 package sai.main.lang.parser;
 
 
-
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -20,468 +19,468 @@ public class sai_constitutiveBaseListener implements sai_constitutiveListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAgent_sf_decl(@NotNull sai_constitutiveParser.Agent_sf_declContext ctx) { }
+	@Override public void enterConstitutive_spec(sai_constitutiveParser.Constitutive_specContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAgent_sf_decl(@NotNull sai_constitutiveParser.Agent_sf_declContext ctx) { }
+	@Override public void exitConstitutive_spec(sai_constitutiveParser.Constitutive_specContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSff_atom(@NotNull sai_constitutiveParser.Sff_atomContext ctx) { }
+	@Override public void enterNormative_id(sai_constitutiveParser.Normative_idContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSff_atom(@NotNull sai_constitutiveParser.Sff_atomContext ctx) { }
+	@Override public void exitNormative_id(sai_constitutiveParser.Normative_idContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNormative_id(@NotNull sai_constitutiveParser.Normative_idContext ctx) { }
+	@Override public void enterStatus_functions(sai_constitutiveParser.Status_functionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNormative_id(@NotNull sai_constitutiveParser.Normative_idContext ctx) { }
+	@Override public void exitStatus_functions(sai_constitutiveParser.Status_functionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSff_rel(@NotNull sai_constitutiveParser.Sff_relContext ctx) { }
+	@Override public void enterAgent_sf_decl(sai_constitutiveParser.Agent_sf_declContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSff_rel(@NotNull sai_constitutiveParser.Sff_relContext ctx) { }
+	@Override public void exitAgent_sf_decl(sai_constitutiveParser.Agent_sf_declContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSff_and_expr(@NotNull sai_constitutiveParser.Sff_and_exprContext ctx) { }
+	@Override public void enterAgent_sf_list(sai_constitutiveParser.Agent_sf_listContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSff_and_expr(@NotNull sai_constitutiveParser.Sff_and_exprContext ctx) { }
+	@Override public void exitAgent_sf_list(sai_constitutiveParser.Agent_sf_listContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEvent_sf(@NotNull sai_constitutiveParser.Event_sfContext ctx) { }
+	@Override public void enterEvent_sf_decl(sai_constitutiveParser.Event_sf_declContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEvent_sf(@NotNull sai_constitutiveParser.Event_sfContext ctx) { }
+	@Override public void exitEvent_sf_decl(sai_constitutiveParser.Event_sf_declContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSf_formula(@NotNull sai_constitutiveParser.Sf_formulaContext ctx) { }
+	@Override public void enterEvent_sf_list(sai_constitutiveParser.Event_sf_listContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSf_formula(@NotNull sai_constitutiveParser.Sf_formulaContext ctx) { }
+	@Override public void exitEvent_sf_list(sai_constitutiveParser.Event_sf_listContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterList_of_pred_terms(@NotNull sai_constitutiveParser.List_of_pred_termsContext ctx) { }
+	@Override public void enterState_sf_decl(sai_constitutiveParser.State_sf_declContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitList_of_pred_terms(@NotNull sai_constitutiveParser.List_of_pred_termsContext ctx) { }
+	@Override public void exitState_sf_decl(sai_constitutiveParser.State_sf_declContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCount_as_stat(@NotNull sai_constitutiveParser.Count_as_statContext ctx) { }
+	@Override public void enterState_sf_list(sai_constitutiveParser.State_sf_listContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCount_as_stat(@NotNull sai_constitutiveParser.Count_as_statContext ctx) { }
+	@Override public void exitState_sf_list(sai_constitutiveParser.State_sf_listContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterState_sf(@NotNull sai_constitutiveParser.State_sfContext ctx) { }
+	@Override public void enterConstitutive_rules(sai_constitutiveParser.Constitutive_rulesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitState_sf(@NotNull sai_constitutiveParser.State_sfContext ctx) { }
+	@Override public void exitConstitutive_rules(sai_constitutiveParser.Constitutive_rulesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterState_sf_decl(@NotNull sai_constitutiveParser.State_sf_declContext ctx) { }
+	@Override public void enterConst_rule(sai_constitutiveParser.Const_ruleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitState_sf_decl(@NotNull sai_constitutiveParser.State_sf_declContext ctx) { }
+	@Override public void exitConst_rule(sai_constitutiveParser.Const_ruleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPred(@NotNull sai_constitutiveParser.PredContext ctx) { }
+	@Override public void enterId(sai_constitutiveParser.IdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPred(@NotNull sai_constitutiveParser.PredContext ctx) { }
+	@Override public void exitId(sai_constitutiveParser.IdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterId(@NotNull sai_constitutiveParser.IdContext ctx) { }
+	@Override public void enterCount_as_stat(sai_constitutiveParser.Count_as_statContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitId(@NotNull sai_constitutiveParser.IdContext ctx) { }
+	@Override public void exitCount_as_stat(sai_constitutiveParser.Count_as_statContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAgent_sf(@NotNull sai_constitutiveParser.Agent_sfContext ctx) { }
+	@Override public void enterY(sai_constitutiveParser.YContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAgent_sf(@NotNull sai_constitutiveParser.Agent_sfContext ctx) { }
+	@Override public void exitY(sai_constitutiveParser.YContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSff_or_expr(@NotNull sai_constitutiveParser.Sff_or_exprContext ctx) { }
+	@Override public void enterX(sai_constitutiveParser.XContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSff_or_expr(@NotNull sai_constitutiveParser.Sff_or_exprContext ctx) { }
+	@Override public void exitX(sai_constitutiveParser.XContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterState_sf_list(@NotNull sai_constitutiveParser.State_sf_listContext ctx) { }
+	@Override public void enterT(sai_constitutiveParser.TContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitState_sf_list(@NotNull sai_constitutiveParser.State_sf_listContext ctx) { }
+	@Override public void exitT(sai_constitutiveParser.TContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConstitutive_rules(@NotNull sai_constitutiveParser.Constitutive_rulesContext ctx) { }
+	@Override public void enterM(sai_constitutiveParser.MContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitConstitutive_rules(@NotNull sai_constitutiveParser.Constitutive_rulesContext ctx) { }
+	@Override public void exitM(sai_constitutiveParser.MContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAnnotation(@NotNull sai_constitutiveParser.AnnotationContext ctx) { }
+	@Override public void enterAgent_sf(sai_constitutiveParser.Agent_sfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAnnotation(@NotNull sai_constitutiveParser.AnnotationContext ctx) { }
+	@Override public void exitAgent_sf(sai_constitutiveParser.Agent_sfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterState_x(@NotNull sai_constitutiveParser.State_xContext ctx) { }
+	@Override public void enterEvent_sf(sai_constitutiveParser.Event_sfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitState_x(@NotNull sai_constitutiveParser.State_xContext ctx) { }
+	@Override public void exitEvent_sf(sai_constitutiveParser.Event_sfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConstitutive_spec(@NotNull sai_constitutiveParser.Constitutive_specContext ctx) { }
+	@Override public void enterState_sf(sai_constitutiveParser.State_sfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitConstitutive_spec(@NotNull sai_constitutiveParser.Constitutive_specContext ctx) { }
+	@Override public void exitState_sf(sai_constitutiveParser.State_sfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEvent_sf_decl(@NotNull sai_constitutiveParser.Event_sf_declContext ctx) { }
+	@Override public void enterAgent_x(sai_constitutiveParser.Agent_xContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEvent_sf_decl(@NotNull sai_constitutiveParser.Event_sf_declContext ctx) { }
+	@Override public void exitAgent_x(sai_constitutiveParser.Agent_xContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterList_term(@NotNull sai_constitutiveParser.List_termContext ctx) { }
+	@Override public void enterEvent_x(sai_constitutiveParser.Event_xContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitList_term(@NotNull sai_constitutiveParser.List_termContext ctx) { }
+	@Override public void exitEvent_x(sai_constitutiveParser.Event_xContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArithm_term(@NotNull sai_constitutiveParser.Arithm_termContext ctx) { }
+	@Override public void enterState_x(sai_constitutiveParser.State_xContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArithm_term(@NotNull sai_constitutiveParser.Arithm_termContext ctx) { }
+	@Override public void exitState_x(sai_constitutiveParser.State_xContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStatus_functions(@NotNull sai_constitutiveParser.Status_functionsContext ctx) { }
+	@Override public void enterSf_formula(sai_constitutiveParser.Sf_formulaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStatus_functions(@NotNull sai_constitutiveParser.Status_functionsContext ctx) { }
+	@Override public void exitSf_formula(sai_constitutiveParser.Sf_formulaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPred_terms(@NotNull sai_constitutiveParser.Pred_termsContext ctx) { }
+	@Override public void enterSff_or_expr(sai_constitutiveParser.Sff_or_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPred_terms(@NotNull sai_constitutiveParser.Pred_termsContext ctx) { }
+	@Override public void exitSff_or_expr(sai_constitutiveParser.Sff_or_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEvent_x(@NotNull sai_constitutiveParser.Event_xContext ctx) { }
+	@Override public void enterSff_and_expr(sai_constitutiveParser.Sff_and_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEvent_x(@NotNull sai_constitutiveParser.Event_xContext ctx) { }
+	@Override public void exitSff_and_expr(sai_constitutiveParser.Sff_and_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArithm_factor(@NotNull sai_constitutiveParser.Arithm_factorContext ctx) { }
+	@Override public void enterSff_rel(sai_constitutiveParser.Sff_relContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArithm_factor(@NotNull sai_constitutiveParser.Arithm_factorContext ctx) { }
+	@Override public void exitSff_rel(sai_constitutiveParser.Sff_relContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPred_term(@NotNull sai_constitutiveParser.Pred_termContext ctx) { }
+	@Override public void enterArithm_term(sai_constitutiveParser.Arithm_termContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPred_term(@NotNull sai_constitutiveParser.Pred_termContext ctx) { }
+	@Override public void exitArithm_term(sai_constitutiveParser.Arithm_termContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterList(@NotNull sai_constitutiveParser.ListContext ctx) { }
+	@Override public void enterArithm_factor(sai_constitutiveParser.Arithm_factorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitList(@NotNull sai_constitutiveParser.ListContext ctx) { }
+	@Override public void exitArithm_factor(sai_constitutiveParser.Arithm_factorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterM(@NotNull sai_constitutiveParser.MContext ctx) { }
+	@Override public void enterSff_atom(sai_constitutiveParser.Sff_atomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitM(@NotNull sai_constitutiveParser.MContext ctx) { }
+	@Override public void exitSff_atom(sai_constitutiveParser.Sff_atomContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAgent_sf_list(@NotNull sai_constitutiveParser.Agent_sf_listContext ctx) { }
+	@Override public void enterPred(sai_constitutiveParser.PredContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAgent_sf_list(@NotNull sai_constitutiveParser.Agent_sf_listContext ctx) { }
+	@Override public void exitPred(sai_constitutiveParser.PredContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEvent_sf_list(@NotNull sai_constitutiveParser.Event_sf_listContext ctx) { }
+	@Override public void enterList_of_pred_terms(sai_constitutiveParser.List_of_pred_termsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEvent_sf_list(@NotNull sai_constitutiveParser.Event_sf_listContext ctx) { }
+	@Override public void exitList_of_pred_terms(sai_constitutiveParser.List_of_pred_termsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterT(@NotNull sai_constitutiveParser.TContext ctx) { }
+	@Override public void enterPred_terms(sai_constitutiveParser.Pred_termsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitT(@NotNull sai_constitutiveParser.TContext ctx) { }
+	@Override public void exitPred_terms(sai_constitutiveParser.Pred_termsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterX(@NotNull sai_constitutiveParser.XContext ctx) { }
+	@Override public void enterPred_term(sai_constitutiveParser.Pred_termContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitX(@NotNull sai_constitutiveParser.XContext ctx) { }
+	@Override public void exitPred_term(sai_constitutiveParser.Pred_termContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterY(@NotNull sai_constitutiveParser.YContext ctx) { }
+	@Override public void enterAnnotation(sai_constitutiveParser.AnnotationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitY(@NotNull sai_constitutiveParser.YContext ctx) { }
+	@Override public void exitAnnotation(sai_constitutiveParser.AnnotationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConst_rule(@NotNull sai_constitutiveParser.Const_ruleContext ctx) { }
+	@Override public void enterList(sai_constitutiveParser.ListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitConst_rule(@NotNull sai_constitutiveParser.Const_ruleContext ctx) { }
+	@Override public void exitList(sai_constitutiveParser.ListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAgent_x(@NotNull sai_constitutiveParser.Agent_xContext ctx) { }
+	@Override public void enterList_term(sai_constitutiveParser.List_termContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAgent_x(@NotNull sai_constitutiveParser.Agent_xContext ctx) { }
+	@Override public void exitList_term(sai_constitutiveParser.List_termContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEveryRule(@NotNull ParserRuleContext ctx) { }
+	@Override public void enterEveryRule(ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEveryRule(@NotNull ParserRuleContext ctx) { }
+	@Override public void exitEveryRule(ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitTerminal(@NotNull TerminalNode node) { }
+	@Override public void visitTerminal(TerminalNode node) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitErrorNode(@NotNull ErrorNode node) { }
+	@Override public void visitErrorNode(ErrorNode node) { }
 }

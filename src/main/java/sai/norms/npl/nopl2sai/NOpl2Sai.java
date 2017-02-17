@@ -64,7 +64,7 @@ public class NOpl2Sai extends Npl2Sai{
 			}
 
 		}
-		else if(arg1.getState().getFunctor().equals("committed")){			
+		else if(arg1.getState().getFunctor().equals("committed")){
 			for(IScheme2SaiListener listener:schemeListeners){
 				listener.sai_committed(arg1.getState().getTerm(0).toString(), arg1.getState().getTerm(1).toString(), arg1.getState().getTerm(2).toString());
 			}

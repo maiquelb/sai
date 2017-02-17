@@ -190,7 +190,7 @@ public class RuleEngine extends AbstractWSPRuleEngine {
 	 * of the Count-as Engine 
 	 **/
 	@Override
-	protected void processObsPropertyChanged(ArtifactId artifactId, ArtifactObsProperty[] property){		
+	protected void processObsPropertyChanged(ArtifactId artifactId, ArtifactObsProperty[] property){
 		if(!toIgnoreArt(artifactId)){
 			for(int i=0;i<property.length;i++){
 				for(SaiEngine engine:institutions){
@@ -266,8 +266,9 @@ public class RuleEngine extends AbstractWSPRuleEngine {
 	@Override
 	protected void processSignal(Tuple signal) {
 		try {
-			Pred p = new Pred(parseLiteral(signal.toString()));				
-			if(p.getTerms().size()>0){ //if the signal(taken as predicate) does not have terms, then it does not fit with the expected pattern
+			Pred p = new Pred(parseLiteral(signal.toString()));
+			//if(p.getTerms().size()>0){ //if the signal(taken as predicate) does not have terms, then it does not fit with the expected pattern
+			if(p.getArity()>0){ //if the signal(taken as predicate) does not have terms, then it does not fit with the expected pattern
 				//get the agent that triggers the signal
 				Term triggeringAgent = p.getTerm(p.getTerms().size()-1);
 				p.getTerms().remove(p.getTerms().size()-1);
