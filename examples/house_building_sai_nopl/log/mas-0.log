@@ -1,0 +1,20 @@
+[JaCaMoLauncher] Workspace wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_Plumbing: tools.AuctionArt("Plumbing",500) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_WindowsDoors: tools.AuctionArt("WindowsDoors",2500) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_Roof: tools.AuctionArt("Roof",2000) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_SitePreparation: tools.AuctionArt("SitePreparation",2000) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_Walls: tools.AuctionArt("Walls",1000) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_Painting: tools.AuctionArt("Painting",1200) at wsp_auction created.
+[JaCaMoLauncher] artifact clock: cartago.tools.Clock() at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_Floors: tools.AuctionArt("Floors",1000) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_ElectricalSystem: tools.AuctionArt("ElectricalSystem",500) at wsp_auction created.
+[JaCaMoLauncher] Workspace wsp_ora4mas created.
+[JaCaMoLauncher] artifact bhsch: sai.bridges.jacamo.SchemeBoardSai("src/org/house-os.xml",build_house_sch) at wsp_ora4mas created.
+[JaCaMoLauncher] artifact hsh_group: sai.bridges.jacamo.GroupBoardSai("src/org/house-os.xml",house_group) at wsp_ora4mas created.
+[JaCaMoLauncher] Workspace wsp_sai created.
+[JaCaMoLauncher] artifact sai: sai.bridges.jacamo.ConstitutiveArt("bh","src/org/constitutive.sai") at wsp_sai created.
+[JaCaMoLauncher] Workspace wsp_house created.
+[JaCaMoLauncher] artifact housegui: simulator.House() at wsp_house created.
+[giacomo] Could not finish intention: intention 184: 
+    +schemes([bhsch])[artifact_id(cobj_21),percept_type(obs_prop),source(percept),artifact_name(cobj_21,hsh_group),workspace(cobj_21,wsp_ora4mas,cobj_6)] <- ... lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)]; .foreach(.member(S,L),{ lookupArtifact(S,ArtId)[wid(W)]; focus(ArtId)[wid(W)]; .concat(GroupName,".",S,NBName); lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)] },java.util.ArrayList$Itr@32a5dc81,{GroupName=hsh_group, _152=wsp_ora4mas, _151=cobj_21, _150=cobj_21, W=cobj_6, L=[bhsch]}) / {GroupName=hsh_group, S=bhsch, _152=wsp_ora4mas, _151=cobj_21, _150=cobj_21, W=cobj_6, ArtId=cobj_20, L=[bhsch], NBName="hsh_group.bhsch"}
+	Trigger: +schemes([bhsch])[artifact_id(cobj_21),code(lookupArtifact("hsh_group.bhsch",_28719)[wid(cobj_6)]),code_line(11),code_src("jar:file:/home/maiquel/git/jacamo/build/libs/jacamo-0.7-SNAPSHOT.jar!/templates/common-moise.asl"),error(action_failed),error_msg("cartago.ArtifactNotAvailableException"),percept_type(obs_prop),source(percept),artifact_name(cobj_21,hsh_group),workspace(cobj_21,wsp_ora4mas,cobj_6)]

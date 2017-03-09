@@ -1,0 +1,20 @@
+[JaCaMoLauncher] Workspace wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_Plumbing: tools.AuctionArt("Plumbing",500) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_WindowsDoors: tools.AuctionArt("WindowsDoors",2500) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_Roof: tools.AuctionArt("Roof",2000) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_SitePreparation: tools.AuctionArt("SitePreparation",2000) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_Walls: tools.AuctionArt("Walls",1000) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_Painting: tools.AuctionArt("Painting",1200) at wsp_auction created.
+[JaCaMoLauncher] artifact clock: cartago.tools.Clock() at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_Floors: tools.AuctionArt("Floors",1000) at wsp_auction created.
+[JaCaMoLauncher] artifact auction_for_ElectricalSystem: tools.AuctionArt("ElectricalSystem",500) at wsp_auction created.
+[JaCaMoLauncher] Workspace wsp_ora4mas created.
+[JaCaMoLauncher] artifact bhsch: sai.bridges.jacamo.SchemeBoardSai("src/org/house-os.xml",build_house_sch) at wsp_ora4mas created.
+[JaCaMoLauncher] artifact hsh_group: sai.bridges.jacamo.GroupBoardSai("src/org/house-os.xml",house_group) at wsp_ora4mas created.
+[JaCaMoLauncher] Workspace wsp_sai created.
+[JaCaMoLauncher] artifact sai: sai.bridges.jacamo.ConstitutiveArt("bh","src/org/constitutive.sai") at wsp_sai created.
+[JaCaMoLauncher] Workspace wsp_house created.
+[JaCaMoLauncher] artifact housegui: simulator.House() at wsp_house created.
+[giacomo] Failed to build a house due to: Wrong operation arguments: operation joinWorkspace on artifact node (type: cartago.NodeArtifact)
+- expected 2 parameter(s) - types: class java.lang.String, class cartago.OpFeedbackParam
+- actual parameter(s): wsp_ora4mas type: class java.lang.String, wsp_sai type: class cartago.WorkspaceId (action_failed). Command: joinWorkspace("wsp_ora4mas",cobj_8) on /home/maiquel/temp/sai_examples/house_building_sai_nopl/src/agt/giacomo.asl:86
