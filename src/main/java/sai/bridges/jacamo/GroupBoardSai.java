@@ -13,6 +13,7 @@ import ora4mas.nopl.JasonTermWrapper;
 import ora4mas.nopl.oe.CollectiveOE;
 import ora4mas.nopl.oe.Group;
 import sai.main.institution.INormativeEngine;
+import sai.main.institution.SaiEngine;
 import sai.norms.npl.nopl2sai.IGroup2SaiListener;
 import sai.norms.npl.nopl2sai.NOpl2Sai;
 import cartago.ArtifactId;
@@ -159,6 +160,21 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 		}   
 	}
 
+	
+	/**
+	 * Set the institution which the SchemeBoard belongs to. 
+	 * An institution is actually a SaiEngine
+	 */
+    @OPERATION
+    public void setInstitution(SaiEngine institution){
+    	institution.addNormativeEngine(this.getNormEngine());
+    }
+	 
+	
+    @Override
+	public INormativeEngine getNormEngine() {	
+		return this.npl2sai;
+	}
 
 
 	//the same in the superclass. Should be protected there

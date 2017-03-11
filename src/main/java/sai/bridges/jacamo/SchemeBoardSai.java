@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import sai.main.institution.INormativeEngine;
+import sai.main.institution.SaiEngine;
 import cartago.ArtifactConfig;
 import cartago.ArtifactId;
 import cartago.CartagoException;
@@ -46,6 +47,7 @@ import ora4mas.nopl.tools.os2nopl;
 public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 	private NOpl2Sai npl2sai;
+	private SaiEngine institution;
 	//private List<Commitment> commitmentsList = Collections.synchronizedList(new ArrayList<Commitment>());	
 	//private List<Goal> achievementsList = Collections.synchronizedList(new ArrayList<Goal>());
 	private List<Commitment> commitmentsList = new ArrayList<Commitment>();	
@@ -76,12 +78,33 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 
 
-
+	/**
+	 * Set the institution which the SchemeBoard belongs to. 
+	 * An institution is actually a SaiEngine
+	 */
+    @OPERATION
+    public void setInstitution(SaiEngine institution){
+    	this.institution = institution;
+    	institution.addNormativeEngine(this.getNormEngine());
+    }
+    
+    public SaiEngine getInstitution(){
+    	return this.institution;
+    }
+	 
+	
+    @Override
+	public INormativeEngine getNormEngine() {	
+		return this.npl2sai;
+	}
+    
 	@OPERATION
 	public void getNormativeEngine(OpFeedbackParam<INormativeEngine> nEngine){
 		nEngine.set(this.npl2sai);
 	}
-
+	
+	
+	
 
 
 	@Override
@@ -93,7 +116,44 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 	}
 
 
-
+	@LINK protected void updateRolePlayers(final String grId, final Collection<Player> rp) throws NormativeFailureException, CartagoException {
+        ora4masOperationTemplate(new Operation() {
+            public void exec() throws NormativeFailureException, Exception {
+                Group g = new Group(grId);
+                for (Player p: rp)
+                    g.addPlayer(p.getAg(), p.getTarget());
+                g.addResponsibleForScheme(orgState.getId());
+                
+                boolean newLink = !getSchState().getGroupsResponsibleFor().contains(g);
+                getSchState().addGroupResponsibleFor(g);
+        
+                nengine.verifyNorms();
+        
+                getObsProperty(obsPropGroups).updateValue(getSchState().getResponsibleGroupsAsProlog());
+                if (newLink) {
+                    // first time the group is linked to this scheme, create normative board
+                    // create normative board
+                    String nbId = grId+"."+orgState.getId();
+                    ArtifactId aid = makeArtifact(nbId, NormativeBoardSai.class.getName(), new ArtifactConfig() );
+                    log("updateRolePlayers!!!!!!!!");
+                    execLinkedOp(aid, "load", os2nopl.transform(spec, false));
+                    execLinkedOp(aid, "doSubscribeDFP", orgState.getId());
+                    execLinkedOp(aid,"setInstitution", getInstitution());
+                    log("updateRolePlayers xxxxxxxx");
+                    
+                    String nplProgram = spec.getFS().getOS().getNS().getNPLNorms();
+                    if (nplProgram != null) {
+                        StringBuilder out = new StringBuilder();
+                        out.append("scope npl_norms_for_"+spec.getId()+" {\n");
+                        out.append(nplProgram);
+                        out.append("\n}");
+                        execLinkedOp(aid, "load", out.toString());
+                    }
+                }
+            }
+        }, null);
+    }
+    
 	
 	public Scheme getSchState() {
 		return (Scheme)orgState;
@@ -178,7 +238,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 	@INTERNAL_OPERATION
 	void internal_commitMission(String agent, String mission){
 		try {
-			//log("internal_commitMission: " + agent + ";" + mission);
+			//log("internal_commitMission: " + agent + ";" + mission);		
 			this.commitMission(agent, mission);
 		} catch (CartagoException e) {
 			e.printStackTrace();
@@ -279,13 +339,13 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 								if(toCommit){
 									execInternalOp("internal_commitMission",c.getAgent(),c.getMission());
 									added.add(c);
-								}else{
+								}/*else{
 									log("do not believe " + parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+getSchState().getId()+"\"),D)[created(_)])"));
 									Iterator<Literal> it =   nengine.getAg().getBB().iterator();
 									while(it.hasNext()){
 										log("iterator: " + it.next());
 									}
-								}
+								}*/
 							} catch (jason.asSyntax.parser.ParseException e) {
 								e.printStackTrace();
 							}
@@ -327,5 +387,8 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 		}
 	}
+
+
+	
 
 }

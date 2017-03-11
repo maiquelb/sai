@@ -107,7 +107,6 @@ public class ConstitutiveArt extends Artifact implements ConstitutiveListener{
 		sai = new SaiEngine();
 		this.ruleEngine.addInstitution(sai);
 		this.sai.addConstitutiveListener(this);
-
 	
 		try {
 			loadConstitutiveProgram(constitutiveProgramPath);
@@ -134,6 +133,11 @@ public class ConstitutiveArt extends Artifact implements ConstitutiveListener{
 	@OPERATION 
 	public void getRuleEngine(OpFeedbackParam<RuleEngine> engine){
 		engine.set(this.ruleEngine);
+	}
+	
+	@OPERATION 
+	public void getSaiEngine(OpFeedbackParam<SaiEngine> engine){
+		engine.set(this.sai);
 	}
 	
 	@OPERATION
@@ -356,4 +360,3 @@ public class ConstitutiveArt extends Artifact implements ConstitutiveListener{
 
 
 }
-

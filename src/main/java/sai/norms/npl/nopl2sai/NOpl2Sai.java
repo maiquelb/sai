@@ -19,6 +19,7 @@ public class NOpl2Sai extends Npl2Sai{
 
 	public ArrayList<IScheme2SaiListener> schemeListeners = new ArrayList<IScheme2SaiListener>();
 	public ArrayList<IGroup2SaiListener> groupListeners = new ArrayList<IGroup2SaiListener>();
+	public ArrayList<INormativeBoard2SaiListener> normListeners = new ArrayList<INormativeBoard2SaiListener>();
 
 	public NOpl2Sai(NPLInterpreter nengine) {
 		super(nengine);
@@ -40,7 +41,16 @@ public class NOpl2Sai extends Npl2Sai{
 	public void removeGroupListener(IGroup2SaiListener listener){
 		groupListeners.remove(listener);
 	}
-
+	
+	public void addNormListener(INormativeBoard2SaiListener listener){
+		normListeners.add(listener);
+		System.out.println("[NOpl2Sai] adding NormListener");
+	}
+	
+	public void removeNormListener(INormativeBoard2SaiListener listener){
+		normListeners.remove(listener);
+		System.out.println("[NOpl2Sai] adding NormListener");
+	}
 	
 	/**
 	 * Overloading the superclass method to handle state-status functions corresponding to organizaitional states
@@ -65,7 +75,11 @@ public class NOpl2Sai extends Npl2Sai{
 
 		}
 		else if(arg1.getState().getFunctor().equals("committed")){
-			for(IScheme2SaiListener listener:schemeListeners){
+			/*for(IScheme2SaiListener listener:schemeListeners){
+				listener.sai_committed(arg1.getState().getTerm(0).toString(), arg1.getState().getTerm(1).toString(), arg1.getState().getTerm(2).toString());
+			}
+			System.out.println("[NOpl2Sai] committed - norm listeners " + normListeners.size());*/
+			for(INormativeBoard2SaiListener listener:normListeners){
 				listener.sai_committed(arg1.getState().getTerm(0).toString(), arg1.getState().getTerm(1).toString(), arg1.getState().getTerm(2).toString());
 			}
 		}
