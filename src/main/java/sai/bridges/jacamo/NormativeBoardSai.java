@@ -52,7 +52,9 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
         
         this.npl2sai = new NOpl2Sai(getNPLInterpreter());
 		this.npl2sai.addNormListener(this);
-
+		
+		
+		commitmentChecker.start();
     }
 
 	
@@ -92,7 +94,7 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 	public void sai_committed(String agent, String mission, String scheme) {
 		synchronized (commitmentsList) {
 			commitmentsList.add(new Commitment(agent, mission, scheme)); //adds to the list to be consumed by a thread
-			log("added " + commitmentsList.get(commitmentsList.size()-1));
+			log("added " + commitmentsList.get(commitmentsList.size()-1) + " - " + commitmentsList.size());
 		}			
 		commitmentChecker.interrupt();	
 	}
@@ -109,7 +111,7 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 			super();
 			this.agent = agent;
 			this.mission = mission;
-			this.scheme = scheme;
+			this.scheme = scheme.replace("\"", "");
 		}
 
 		public String getAgent() {
@@ -171,6 +173,7 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 			ArrayList<Commitment> added = new ArrayList<Commitment>();
 			ArrayList<Goal> addedAchievement = new ArrayList<Goal>();
 			boolean toCommit;
+			log("Commitment checker running " + commitmentsList.size());
 			while(true){			
 				if(commitmentsList.size()>0){
 					added.clear();
@@ -179,18 +182,20 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 						for(Commitment c:commitmentsList){
 							try {
 								//log("commitment checker - " + c.getAgent()+","+c.getMission());
-								toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+c.scheme+"\"),D)[created(_)])"), new Unifier());
-								//toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+","+c.scheme+"),D)[created(_)])"), new Unifier());
+								//System.out.println("adding to commitmentList: " + "active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+c.scheme+"\"),D)[created(_)])"),;
+								//toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+c.scheme+"\"),D)[created(_)])"), new Unifier());
+								toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+","+c.scheme+"),D)[created(_)])"), new Unifier());
 								if(toCommit){
 									//execInternalOp("internal_commitMission",c.getAgent(),c.getMission());
 									//added.add(c);
 									log(">>>>>>>>>>>>>>> To commit " + c.toString());
 								}else{
-									log("do not believe " + parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+c.scheme+"\"),D)[created(_)])"));
-									//Iterator<Literal> it =   nengine.getAg().getBB().iterator();
-									//while(it.hasNext()){
-									//	log("iterator: " + it.next());
-									//}
+									//log("do not believe " + parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+c.scheme+"\"),D)[created(_)])"));
+									log("do not believe " + parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+","+c.scheme+"),D)[created(_)])"));
+									Iterator<jason.asSyntax.Literal> it =   nengine.getAg().getBB().iterator();
+									while(it.hasNext()){
+										log("iterator: " + it.next());
+									}
 								}
 							} catch (jason.asSyntax.parser.ParseException e) {
 								e.printStackTrace();
