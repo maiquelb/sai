@@ -85,11 +85,18 @@ number_of_tasks(NS) :- .findall( S, task(S), L) & .length(L,NS).
    	  //cartago.set_current_wsp(WspOra4mas);
           joinWorkspace("wsp_ora4mas",J);
    	  lookupArtifact("bhsch",SchArtId);
-      getNormativeEngine(NEs)[artifact_id(SchArtId)];
-      addNormativeEngine(NEs)[artifact_id(ArtSai)]; //adds the normative engine from the scheme artifact to the sai engine. Thus, the normative engine is fed with the constitutive state      
+      //getNormativeEngine(NEs)[artifact_id(SchArtId)];
+      //addNormativeEngine(NEs)[artifact_id(ArtSai)]; //adds the normative engine from the scheme artifact to the sai engine. Thus, the normative engine is fed with the constitutive state      
+
+      getSaiEngine(SE)[artifact_id(ArtSai)];
+      setInstitution(SE)[artifact_id(SchArtId)];
+         
       lookupArtifact("hsh_group",GrpArtId);  
-      getNormativeEngine(NEg)[artifact_id(GrpArtId)];
-      addNormativeEngine(NEg)[artifact_id(ArtSai)]; //adds the normative engine from the group artifact to the sai engine. Thus, the normative engine is fed with the constitutive state
+      //getNormativeEngine(NEg)[artifact_id(GrpArtId)];
+      //addNormativeEngine(NEg)[artifact_id(ArtSai)]; //adds the normative engine from the group artifact to the sai engine. Thus, the normative engine is fed with the constitutive state
+
+	getSaiEngine(SE)[artifact_id(ArtSai)];
+       setInstitution(SE)[artifact_id(GrpArtId)];
       .
       
       
@@ -109,7 +116,7 @@ number_of_tasks(NS) :- .findall( S, task(S), L) & .length(L,NS).
 -!contract
    <- .print("Error on contract").
    
-+!wait_for_bids:nticks(X)&X>8000 // use an internal deadline of 5 seconds to close the auctions
++!wait_for_bids:nticks(X)&X>10000 // use an internal deadline of 5 seconds to close the auctions
    <-   joinWorkspace("wsp_auction",I);
       //?jcm__art("clock", Clock);
       stop[artifact_id(Clock)];
@@ -118,7 +125,7 @@ number_of_tasks(NS) :- .findall( S, task(S), L) & .length(L,NS).
       
 +!wait_for_bids
    <- ?nticks(X);
-      println("Waiting the bids ", 8000-X," seconds...");
+      println("Waiting the bids ", 10000-X," seconds...");
       .wait(1000); 
       !wait_for_bids;
       .
