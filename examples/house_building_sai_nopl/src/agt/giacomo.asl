@@ -95,7 +95,6 @@ number_of_tasks(NS) :- .findall( S, task(S), L) & .length(L,NS).
       //getNormativeEngine(NEg)[artifact_id(GrpArtId)];
       //addNormativeEngine(NEg)[artifact_id(ArtSai)]; //adds the normative engine from the group artifact to the sai engine. Thus, the normative engine is fed with the constitutive state
 
-	getSaiEngine(SE)[artifact_id(ArtSai)];
        setInstitution(SE)[artifact_id(GrpArtId)];
       .
       
