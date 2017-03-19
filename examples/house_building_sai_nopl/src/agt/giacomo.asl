@@ -88,10 +88,12 @@ number_of_tasks(NS) :- .findall( S, task(S), L) & .length(L,NS).
       //getNormativeEngine(NEs)[artifact_id(SchArtId)];
       //addNormativeEngine(NEs)[artifact_id(ArtSai)]; //adds the normative engine from the scheme artifact to the sai engine. Thus, the normative engine is fed with the constitutive state      
 
+      debug(inspector_gui(on))[artifact_id(SchArtId)]; 
       getSaiEngine(SE)[artifact_id(ArtSai)];
       setInstitution(SE)[artifact_id(SchArtId)];
-         
+               
       lookupArtifact("hsh_group",GrpArtId);  
+      debug(inspector_gui(on))[artifact_id(GrpArtId)]; 
       //getNormativeEngine(NEg)[artifact_id(GrpArtId)];
       //addNormativeEngine(NEg)[artifact_id(ArtSai)]; //adds the normative engine from the group artifact to the sai engine. Thus, the normative engine is fed with the constitutive state
 

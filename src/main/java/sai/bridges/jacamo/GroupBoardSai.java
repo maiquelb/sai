@@ -12,6 +12,7 @@ import ora4mas.nopl.GroupBoard;
 import ora4mas.nopl.JasonTermWrapper;
 import ora4mas.nopl.oe.CollectiveOE;
 import ora4mas.nopl.oe.Group;
+import ora4mas.nopl.Operation;
 import sai.main.institution.INormativeEngine;
 import sai.main.institution.SaiEngine;
 import sai.norms.npl.nopl2sai.IGroup2SaiListener;
@@ -59,7 +60,8 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 		adoptRole(ag, role);
 	}
 
-	@INTERNAL_OPERATION
+	
+	/*@INTERNAL_OPERATION
 	private void adoptRole(String ag, String role) {
 		if (!running) return;
 		boolean oldStatus = isWellFormed();
@@ -102,7 +104,44 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 			failed(e.toString());
 		}   
 	}
-
+*/
+	
+	/*TODO: make protected in superclass*/
+	private void adoptRole(final String ag, final String role) {
+        ora4masOperationTemplate(new Operation() {
+            public void exec() throws NormativeFailureException, Exception {
+            	log("goinf to adopt role " + role + ", " + ag);
+                boolean oldStatus = isWellFormed();
+                orgState.addPlayer(ag, role);
+    
+                nengine.verifyNorms();
+                
+                boolean status = isWellFormed();
+                if (parentGroup != null) {
+                    execLinkedOp(parentGroup, "updateSubgroupPlayers", orgState.getId(), orgState.getPlayers());
+                    if (status != oldStatus) {
+                        logger.fine(orgState.getId()+": informing parent group that now my formation is "+status);
+                        execLinkedOp(parentGroup, "updateSubgroupFormationStatus", orgState.getId(), status);
+                    }
+                }
+                notifyObservers();
+    
+                defineObsProperty(obsPropPlay, 
+                        new JasonTermWrapper(ag), 
+                        new JasonTermWrapper(role), 
+                        new JasonTermWrapper(GroupBoardSai.this.getId().getName()));            
+                if (status != oldStatus) { 
+                    getObsProperty(obsWellFormed).updateValue(new JasonTermWrapper(status ? "ok" : "nok"));
+                    
+                    while (!futureSchemes.isEmpty()) {
+                        String sch = futureSchemes.remove(0);
+                        //logger.info("Since the group "+orgState.getId()+" is now well formed, adding scheme "+sch);
+                        addScheme(sch);
+                    }
+                }
+            }
+        }, "Error adopting role "+role);
+    }
 
 	//from the superclass - should be protected there
 	private void notifyObservers() throws CartagoException {
