@@ -110,7 +110,6 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 	private void adoptRole(final String ag, final String role) {
         ora4masOperationTemplate(new Operation() {
             public void exec() throws NormativeFailureException, Exception {
-            	log("goinf to adopt role " + role + ", " + ag);
                 boolean oldStatus = isWellFormed();
                 orgState.addPlayer(ag, role);
     

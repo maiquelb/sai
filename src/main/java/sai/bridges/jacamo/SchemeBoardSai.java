@@ -135,11 +135,9 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
                     // create normative board
                     String nbId = grId+"."+orgState.getId();
                     ArtifactId aid = makeArtifact(nbId, NormativeBoardSai.class.getName(), new ArtifactConfig() );
-                    log("updateRolePlayers!!!!!!!!");
                     execLinkedOp(aid, "load", os2nopl.transform(spec, false));
                     execLinkedOp(aid, "doSubscribeDFP", orgState.getId());
                     execLinkedOp(aid,"setInstitution", getInstitution());
-                    log("updateRolePlayers xxxxxxxx");
                     
                     String nplProgram = spec.getFS().getOS().getNS().getNPLNorms();
                     if (nplProgram != null) {
@@ -224,7 +222,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 	@Override
 	public void sai_committed(String agent, String mission, String scheme) {
-		//log("sai_committed: " + agent + ";" + mission + ";" + scheme);		
+		log("sai_committed: " + agent + ";" + mission + ";" + scheme);		
 		if(getSchState().getId().equals(scheme.replaceAll("\"", ""))){
 			synchronized (commitmentsList) {
 				commitmentsList.add(new Commitment(agent, mission)); //adds to the list to be consumed by a thread
@@ -238,7 +236,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 	@INTERNAL_OPERATION
 	void internal_commitMission(String agent, String mission){
 		try {
-			//log("internal_commitMission: " + agent + ";" + mission);		
+			log("internal_commitMission: " + agent + ";" + mission);		
 			this.commitMission(agent, mission);
 		} catch (CartagoException e) {
 			e.printStackTrace();
@@ -334,18 +332,18 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 					synchronized (commitmentsList) {						
 						for(Commitment c:commitmentsList){
 							try {
-								//log("commitment checker - " + c.getAgent()+","+c.getMission());
+								log("commitment checker - " + c.getAgent()+","+c.getMission());
 								toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+getSchState().getId()+"\"),D)[created(_)])"), new Unifier());
 								if(toCommit){
 									execInternalOp("internal_commitMission",c.getAgent(),c.getMission());
 									added.add(c);
-								}/*else{
+								}else{
 									log("do not believe " + parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+getSchState().getId()+"\"),D)[created(_)])"));
 									Iterator<Literal> it =   nengine.getAg().getBB().iterator();
 									while(it.hasNext()){
 										log("iterator: " + it.next());
 									}
-								}*/
+								}
 							} catch (jason.asSyntax.parser.ParseException e) {
 								e.printStackTrace();
 							}

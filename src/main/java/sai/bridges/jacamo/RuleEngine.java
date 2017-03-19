@@ -191,6 +191,7 @@ public class RuleEngine extends AbstractWSPRuleEngine {
 	 **/
 	@Override
 	protected void processObsPropertyChanged(ArtifactId artifactId, ArtifactObsProperty[] property){
+                //System.out.println("[RuleEngine] property changed " + artifactId.toString() + ", " + property.toString());		
 		if(!toIgnoreArt(artifactId)){
 			for(int i=0;i<property.length;i++){
 				for(SaiEngine engine:institutions){
@@ -215,6 +216,7 @@ public class RuleEngine extends AbstractWSPRuleEngine {
 
 	@Override
 	protected void processObsPropertyAdded(ArtifactId artifactId, ArtifactObsProperty[] property){
+                //System.out.println("[RuleEngine] property added " + artifactId.toString() + ", " + property.toString());		
 		if(!toIgnoreArt(artifactId)){
 			for(int i=0;i<property.length;i++){
 				for(SaiEngine engine:institutions){

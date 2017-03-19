@@ -15,4 +15,3 @@
 [JaCaMoLauncher] artifact sai: sai.bridges.jacamo.ConstitutiveArt("bh","src/org/constitutive.sai") at wsp_sai created.
 [JaCaMoLauncher] Workspace wsp_house created.
 [JaCaMoLauncher] artifact housegui: simulator.House() at wsp_house created.
-[giacomo] Error on contract

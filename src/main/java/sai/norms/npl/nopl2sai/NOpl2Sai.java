@@ -44,12 +44,10 @@ public class NOpl2Sai extends Npl2Sai{
 	
 	public void addNormListener(INormativeBoard2SaiListener listener){
 		normListeners.add(listener);
-		System.out.println("[NOpl2Sai] adding NormListener");
 	}
 	
 	public void removeNormListener(INormativeBoard2SaiListener listener){
 		normListeners.remove(listener);
-		System.out.println("[NOpl2Sai] adding NormListener");
 	}
 	
 	/**
@@ -75,10 +73,10 @@ public class NOpl2Sai extends Npl2Sai{
 
 		}
 		else if(arg1.getState().getFunctor().equals("committed")){
-			/*for(IScheme2SaiListener listener:schemeListeners){
+			for(IScheme2SaiListener listener:schemeListeners){
+                                System.out.println("[NOpl2Sai] committed - scheme listeners " + schemeListeners.size());
 				listener.sai_committed(arg1.getState().getTerm(0).toString(), arg1.getState().getTerm(1).toString(), arg1.getState().getTerm(2).toString());
-			}
-			System.out.println("[NOpl2Sai] committed - norm listeners " + normListeners.size());*/
+			}			
 			for(INormativeBoard2SaiListener listener:normListeners){
 				listener.sai_committed(arg1.getState().getTerm(0).toString(), arg1.getState().getTerm(1).toString(), arg1.getState().getTerm(2).toString());
 			}

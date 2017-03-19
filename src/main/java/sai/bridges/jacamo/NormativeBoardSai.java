@@ -6,12 +6,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import cartago.CartagoException;
+import cartago.INTERNAL_OPERATION;
 import cartago.LINK;
 import cartago.OPERATION;
 import cartago.manual.syntax.Literal;
 import jason.asSemantics.Unifier;
+import jason.asSyntax.ASSyntax;
 import jason.util.Config;
 import npl.NPLInterpreter;
+import npl.NormativeFailureException;
 import ora4mas.nopl.NormativeBoard;
 import ora4mas.nopl.WebInterface;
 import sai.main.institution.INormativeEngine;
@@ -60,7 +64,7 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 	
 	 
 	
-    
+    @Override
 	public INormativeEngine getNormEngine() {	
 		return this.npl2sai;
 	}
@@ -70,7 +74,7 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 	@LINK
 	public void setInstitution(SaiEngine institution){
 		this.institution = institution;
-		institution.addNormativeEngine(this.getNormEngine());
+		institution.addNormativeEngine(this.npl2sai);		
 	}
 
 
@@ -100,6 +104,19 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 	}
 	
 
+	
+	/**
+	 * The same as the operation addFact in the superclass
+	 * @param f
+	 * @throws jason.asSyntax.parser.ParseException
+	 * @throws NormativeFailureException
+	 */
+	public void addFact(String f) throws jason.asSyntax.parser.ParseException, NormativeFailureException {
+        nengine.addFact(ASSyntax.parseLiteral(f));
+        nengine.verifyNorms();
+        updateGuiOE();
+    }
+    
 	
 	private class Commitment{
 
@@ -188,7 +205,12 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 								if(toCommit){
 									//execInternalOp("internal_commitMission",c.getAgent(),c.getMission());
 									//added.add(c);
-									log(">>>>>>>>>>>>>>> To commit " + c.toString());
+									addFact("committed("+c.getAgent()+","+c.getMission()+","+c.scheme+")");
+									log("committing - committed("+c.getAgent()+","+c.getMission()+","+c.scheme+")");
+									Iterator<jason.asSyntax.Literal> it =   nengine.getAg().getBB().iterator();
+									while(it.hasNext()){
+										log("iterator: " + it.next());
+									}
 								}else{
 									//log("do not believe " + parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+c.scheme+"\"),D)[created(_)])"));
 									log("do not believe " + parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+","+c.scheme+"),D)[created(_)])"));
@@ -197,7 +219,7 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 										log("iterator: " + it.next());
 									}
 								}
-							} catch (jason.asSyntax.parser.ParseException e) {
+							} catch (jason.asSyntax.parser.ParseException | NormativeFailureException e) {
 								e.printStackTrace();
 							}
 						}	

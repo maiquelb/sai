@@ -15,6 +15,3 @@
 [JaCaMoLauncher] artifact sai: sai.bridges.jacamo.ConstitutiveArt("bh","src/org/constitutive.sai") at wsp_sai created.
 [JaCaMoLauncher] Workspace wsp_house created.
 [JaCaMoLauncher] artifact housegui: simulator.House() at wsp_house created.
-[giacomo] Failed to build a house due to: Wrong operation arguments: operation joinWorkspace on artifact node (type: cartago.NodeArtifact)
-- expected 2 parameter(s) - types: class java.lang.String, class cartago.OpFeedbackParam
-- actual parameter(s): wsp_ora4mas type: class java.lang.String, wsp_sai type: class cartago.WorkspaceId (action_failed). Command: joinWorkspace("wsp_ora4mas",cobj_8) on /home/maiquel/temp/sai_examples/house_building_sai_nopl/src/agt/giacomo.asl:86

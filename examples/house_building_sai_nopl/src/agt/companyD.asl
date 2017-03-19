@@ -9,7 +9,7 @@
 +task(S)[artifact_id(Art)]
    <- .wait(math.random(500)+50);
       Bid = math.floor(math.random(10000))+800;
-      .wait(3000); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
+      .wait(5000); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
       //?jcm__ws("wsp_auction",WspAuction);
    	//  cartago.set_current_wsp(WspAuction);
       bid( Bid )[artifact_id(Art)]. // recall that the artifact ignores if this

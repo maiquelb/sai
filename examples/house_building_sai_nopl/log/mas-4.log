@@ -15,6 +15,6 @@
 [JaCaMoLauncher] artifact sai: sai.bridges.jacamo.ConstitutiveArt("bh","src/org/constitutive.sai") at wsp_sai created.
 [JaCaMoLauncher] Workspace wsp_house created.
 [JaCaMoLauncher] artifact housegui: simulator.House() at wsp_house created.
-[giacomo] Failed to build a house due to: Wrong operation arguments: operation joinWorkspace on artifact node (type: cartago.NodeArtifact)
-- expected 2 parameter(s) - types: class java.lang.String, class cartago.OpFeedbackParam
-- actual parameter(s): wsp_ora4mas type: class java.lang.String, wsp_sai type: class cartago.WorkspaceId (action_failed). Command: joinWorkspace("wsp_ora4mas",cobj_8) on /home/maiquel/temp/sai_examples/house_building_sai_nopl/src/agt/giacomo.asl:86
+[giacomo] Could not finish intention: intention 169: 
+    +schemes([bhsch])[artifact_id(cobj_21),percept_type(obs_prop),source(percept),artifact_name(cobj_21,hsh_group),workspace(cobj_21,wsp_ora4mas,cobj_6)] <- ... lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)]; .foreach(.member(S,L),{ lookupArtifact(S,ArtId)[wid(W)]; focus(ArtId)[wid(W)]; .concat(GroupName,".",S,NBName); lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)] },java.util.ArrayList$Itr@6e4752c1,{GroupName=hsh_group, W=cobj_6, _177=wsp_ora4mas, _176=cobj_21, _175=cobj_21, L=[bhsch]}) / {GroupName=hsh_group, S=bhsch, W=cobj_6, ArtId=cobj_20, _177=wsp_ora4mas, _176=cobj_21, _175=cobj_21, L=[bhsch], NBName="hsh_group.bhsch"}
+	Trigger: +schemes([bhsch])[artifact_id(cobj_21),code(lookupArtifact("hsh_group.bhsch",_64988)[wid(cobj_6)]),code_line(11),code_src("jar:file:/home/maiquel/git/jacamo/build/libs/jacamo-0.7-SNAPSHOT.jar!/templates/common-moise.asl"),error(action_failed),error_msg("cartago.ArtifactNotAvailableException"),percept_type(obs_prop),source(percept),artifact_name(cobj_21,hsh_group),workspace(cobj_21,wsp_ora4mas,cobj_6)]
