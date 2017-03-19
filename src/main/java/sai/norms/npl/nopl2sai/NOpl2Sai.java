@@ -74,7 +74,7 @@ public class NOpl2Sai extends Npl2Sai{
 		}
 		else if(arg1.getState().getFunctor().equals("committed")){
 			for(IScheme2SaiListener listener:schemeListeners){
-                                System.out.println("[NOpl2Sai] committed - scheme listeners " + schemeListeners.size());
+                                //System.out.println("[NOpl2Sai] committed - scheme listeners " + schemeListeners.size());
 				listener.sai_committed(arg1.getState().getTerm(0).toString(), arg1.getState().getTerm(1).toString(), arg1.getState().getTerm(2).toString());
 			}			
 			for(INormativeBoard2SaiListener listener:normListeners){

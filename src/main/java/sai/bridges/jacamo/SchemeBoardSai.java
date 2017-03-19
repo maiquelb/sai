@@ -222,8 +222,9 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 	@Override
 	public void sai_committed(String agent, String mission, String scheme) {
-		log("sai_committed: " + agent + ";" + mission + ";" + scheme);		
-		if(getSchState().getId().equals(scheme.replaceAll("\"", ""))){
+		log("sai_committed: " + agent + ";" + mission + ";" + scheme + " schemeId: " + scheme.replaceAll("\"", ""));		
+		//if(getSchState().getId().equals(scheme.replaceAll("\"", ""))){
+		if(getSchState().getId().replaceAll("\"", "").equals(scheme.replaceAll("\"", ""))){
 			synchronized (commitmentsList) {
 				commitmentsList.add(new Commitment(agent, mission)); //adds to the list to be consumed by a thread
 			}			
@@ -326,24 +327,26 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 			ArrayList<Goal> addedAchievement = new ArrayList<Goal>();
 			boolean toCommit;
 			while(true){			
-				if(commitmentsList.size()>0){
+                                //log("commitment checker - size: " + commitmentsList.size());
+				if(commitmentsList.size()>0){                                        
 					added.clear();
 
 					synchronized (commitmentsList) {						
 						for(Commitment c:commitmentsList){
 							try {
 								log("commitment checker - " + c.getAgent()+","+c.getMission());
-								toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+getSchState().getId()+"\"),D)[created(_)])"), new Unifier());
-								if(toCommit){
+								//toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+getSchState().getId()+"\"),D)[created(_)])"), new Unifier());
+								toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+","+getSchState().getId()+"),D)[created(_)])"), new Unifier());
+								//if(toCommit){
 									execInternalOp("internal_commitMission",c.getAgent(),c.getMission());
 									added.add(c);
-								}else{
+								/*}else{
 									log("do not believe " + parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+getSchState().getId()+"\"),D)[created(_)])"));
 									Iterator<Literal> it =   nengine.getAg().getBB().iterator();
 									while(it.hasNext()){
 										log("iterator: " + it.next());
 									}
-								}
+								}*/
 							} catch (jason.asSyntax.parser.ParseException e) {
 								e.printStackTrace();
 							}
