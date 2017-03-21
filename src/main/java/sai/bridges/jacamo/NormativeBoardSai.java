@@ -207,10 +207,10 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 									//added.add(c);
 									addFact("committed("+c.getAgent()+","+c.getMission()+","+c.scheme+")");
 									log("committing - committed("+c.getAgent()+","+c.getMission()+","+c.scheme+")");
-									Iterator<jason.asSyntax.Literal> it =   nengine.getAg().getBB().iterator();
-									while(it.hasNext()){
+									//Iterator<jason.asSyntax.Literal> it =   nengine.getAg().getBB().iterator();
+									/*while(it.hasNext()){
 										log("iterator: " + it.next());
-									}
+									}*/
 								}/*else{
 									log("do not believe " + parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+","+c.scheme+"),D)[created(_)])"));
 									Iterator<jason.asSyntax.Literal> it =   nengine.getAg().getBB().iterator();

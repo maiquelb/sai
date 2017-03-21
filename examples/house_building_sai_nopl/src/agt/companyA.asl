@@ -4,6 +4,7 @@
 
 { include("common.asl") }
 { include("$jacamoJar/templates/common-cartago.asl") }
+{ include("$jacamoJar/templates/common-moise.asl") }
 
 my_price(300). // initial belief
 
@@ -28,7 +29,12 @@ my_price(300). // initial belief
       installPlumbing. // simulates the action (in GUI artifact)
       
 
+// obligation to achieve a goal      
++obligation(Ag,Norm,What,Deadline)[artifact_id(ArtId)]
+    : .my_name(Ag) & (What=satisfied(Scheme,Goal) | What = done(Scheme,Goal,Ag))
+   <- .print(" ---> working to achieve ",Goal," in scheme ",Scheme);
+      !Goal[scheme(Scheme)];
+      //.print(" <--- done");
+      goalAchieved(Goal)[artifact_id(ArtId)].
+      
 
-+obligation(Ag,Norm,committed(Ag,Mission,Scheme),Deadline)[artifact_id(ArtId),workspace(_,_,W)]
-    : .my_name(Ag)
-   <- .print("I am obliged to commit to ",Mission," on ",Scheme,"... doing so - Artifact " , ArtId).

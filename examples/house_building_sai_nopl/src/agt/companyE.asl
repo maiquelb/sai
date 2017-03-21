@@ -4,6 +4,7 @@
 
 { include("common.asl") }
 { include("$jacamoJar/templates/common-cartago.asl") }
+{ include("$jacamoJar/templates/common-moise.asl") }
 
 my_price(800). // minimum price for the 3 tasks 
 
@@ -30,6 +31,15 @@ sum_of_my_offers(S) :-
       bid( math.max(V-10,P) )[ artifact_id(Art) ].  // place my bid offering a cheaper service
    
 /* plans for execution phase */
+
+// obligation to achieve a goal      
++obligation(Ag,Norm,What,Deadline)[artifact_id(ArtId)]
+    : .my_name(Ag) & (What=satisfied(Scheme,Goal) | What = done(Scheme,Goal,Ag))
+   <- //.print(" ---> working to achieve ",Goal," in scheme ",Scheme);
+      !Goal[scheme(Scheme)];
+      //.print(" <--- done");
+      goalAchieved(Goal)[artifact_id(ArtId)].
+      
 
 { include("org_code.asl") }
 { include("org_goals.asl") }

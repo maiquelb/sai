@@ -4,6 +4,7 @@
 
 { include("common.asl") }
 { include("$jacamoJar/templates/common-cartago.asl") }
+{ include("$jacamoJar/templates/common-moise.asl") }
 
 // a rule to help the agent infer whether it can commit to another task
 can_commit :- 
@@ -34,6 +35,15 @@ my_price("Painting",        1100).
    //	  cartago.set_current_wsp(WspAuction);
       bid( P )[ artifact_id(Art) ].     // place my bid offering a cheaper service
 
+
+// obligation to achieve a goal      
++obligation(Ag,Norm,What,Deadline)[artifact_id(ArtId)]
+    : .my_name(Ag) & (What=satisfied(Scheme,Goal) | What = done(Scheme,Goal,Ag))
+   <- //.print(" ---> working to achieve ",Goal," in scheme ",Scheme);
+      !Goal[scheme(Scheme)];
+      //.print(" <--- done");
+      goalAchieved(Goal)[artifact_id(ArtId)].
+      
 /* plans for execution phase */
 
 { include("org_code.asl") }
