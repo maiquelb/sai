@@ -27,11 +27,4 @@ my_price(1500). // initial belief
       prepareSite. // simulates the action (in GUI artifact)
 */    
 
-// obligation to achieve a goal      
-+obligation(Ag,Norm,What,Deadline)[artifact_id(ArtId)]
-    : .my_name(Ag) & (What=satisfied(Scheme,Goal) | What = done(Scheme,Goal,Ag))
-   <- //.print(" ---> working to achieve ",Goal," in scheme ",Scheme);
-      !Goal[scheme(Scheme)];
-      //.print(" <--- done");
-      goalAchieved(Goal)[artifact_id(ArtId)].
       

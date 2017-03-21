@@ -15,7 +15,7 @@ public class AuctionArt extends Artifact {
         defineObsProperty("task",          taskDs);
         defineObsProperty("maxValue",      maxValue);
         defineObsProperty("currentBid",    maxValue);
-        defineObsProperty("currentWinner", "no_winner");       
+        defineObsProperty("currentWinner", "no_winner"); 
     }
 
     @OPERATION public void bid(double bidValue) {

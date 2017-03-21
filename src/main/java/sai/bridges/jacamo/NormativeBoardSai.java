@@ -98,7 +98,6 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 	public void sai_committed(String agent, String mission, String scheme) {
 		synchronized (commitmentsList) {
 			commitmentsList.add(new Commitment(agent, mission, scheme)); //adds to the list to be consumed by a thread
-			log("added " + commitmentsList.get(commitmentsList.size()-1) + " - " + commitmentsList.size());
 		}			
 		commitmentChecker.interrupt();	
 	}
@@ -190,7 +189,6 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 			ArrayList<Commitment> added = new ArrayList<Commitment>();
 			ArrayList<Goal> addedAchievement = new ArrayList<Goal>();
 			boolean toCommit;
-			log("Commitment checker running " + commitmentsList.size());
 			while(true){			
 				if(commitmentsList.size()>0){
 					added.clear();
@@ -206,7 +204,7 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
 									//execInternalOp("internal_commitMission",c.getAgent(),c.getMission());
 									//added.add(c);
 									addFact("committed("+c.getAgent()+","+c.getMission()+","+c.scheme+")");
-									log("committing - committed("+c.getAgent()+","+c.getMission()+","+c.scheme+")");
+									
 									//Iterator<jason.asSyntax.Literal> it =   nengine.getAg().getBB().iterator();
 									/*while(it.hasNext()){
 										log("iterator: " + it.next());

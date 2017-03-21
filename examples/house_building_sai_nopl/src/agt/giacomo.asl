@@ -117,7 +117,7 @@ number_of_tasks(NS) :- .findall( S, task(S), L) & .length(L,NS).
 -!contract
    <- .print("Error on contract").
    
-+!wait_for_bids:nticks(X)&X>10000 // use an internal deadline of 5 seconds to close the auctions
++!wait_for_bids:nticks(X)&X>12000 // use an internal deadline of 5 seconds to close the auctions
    <-   joinWorkspace("wsp_auction",I);
       //?jcm__art("clock", Clock);
       stop[artifact_id(Clock)];
@@ -126,7 +126,7 @@ number_of_tasks(NS) :- .findall( S, task(S), L) & .length(L,NS).
       
 +!wait_for_bids
    <- ?nticks(X);
-      println("Waiting the bids ", 10000-X," seconds...");
+      println("Waiting the bids ", 12000-X," seconds...");
       .wait(1000); 
       !wait_for_bids;
       .

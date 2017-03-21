@@ -15,3 +15,16 @@
 [JaCaMoLauncher] artifact sai: sai.bridges.jacamo.ConstitutiveArt("bh","src/org/constitutive.sai") at wsp_sai created.
 [JaCaMoLauncher] Workspace wsp_house created.
 [JaCaMoLauncher] artifact housegui: simulator.House() at wsp_house created.
+[companyB] Could not finish intention: intention 263: 
+    +obligation(companyB,(committed(companyB,true,S) & (mission_goal(true,G) & (((goal(_74097_21,G,_74098_22,achievement,_74099_23,D) & (done(bhsch,site_prepared,companyB) = satisfied(S,G))) | (goal(_74103_24,G,_74104_25,performance,_74105_26,D) & (done(bhsch,site_prepared,companyB) = done(S,G,companyB)))) & (well_formed(S) & (not (satisfied(S,G)) & (enabled(S,G) & not (super_satisfied(S,G)))))))),done(bhsch,site_prepared,companyB),1490107452931)[artifact_id(cobj_11),percept_type(obs_prop),source(percept),artifact_name(cobj_11,bhsch),workspace(cobj_11,wsp_ora4mas,cobj_6)] <- ... lookupArtifact("housegui",House); focus(House); .wait(100); ToDo / {Agent=companyB, ToDo[sai__agent(Ag)]=prepareSite, R=(committed(companyB,M,S) & (mission_goal(M,G) & (((goal(_74097_21,G,_74098_22,achievement,_74099_23,D) & (done(bhsch,site_prepared,companyB) = satisfied(S,G))) | (goal(_74103_24,G,_74104_25,performance,_74105_26,D) & (done(bhsch,site_prepared,companyB) = done(S,G,companyB)))) & (well_formed(S) & (not (satisfied(S,G)) & (enabled(S,G) & not (super_satisfied(S,G)))))))), Goal=site_prepared, Scheme=bhsch, Ag=companyB, Deadline=1490107452931, X=sai__freestandingY, I=cobj_2, M=true}
+	Trigger: +obligation(companyB,(committed(companyB,true,S) & (mission_goal(true,G) & (((goal(_74097_21,G,_74098_22,achievement,_74099_23,D) & (done(bhsch,site_prepared,companyB) = satisfied(S,G))) | (goal(_74103_24,G,_74104_25,performance,_74105_26,D) & (done(bhsch,site_prepared,companyB) = done(S,G,companyB)))) & (well_formed(S) & (not (satisfied(S,G)) & (enabled(S,G) & not (super_satisfied(S,G)))))))),done(bhsch,site_prepared,companyB),1490107452931)[artifact_id(cobj_11),code(lookupArtifact("housegui",_74283)),code_line(31),code_src("/home/maiquel/git/sai/examples/house_building_sai_nopl/src/agt/inc/common.asl"),error(action_failed),error_msg("cartago.ArtifactNotAvailableException"),percept_type(obs_prop),source(percept),artifact_name(cobj_11,bhsch),workspace(cobj_11,wsp_ora4mas,cobj_6)]
+[SchemeBoard] companyA has quit, mission install_plumbing removed by the platform!
+[SchemeBoard] companyC4 has quit, mission install_electrical_system removed by the platform!
+[SchemeBoard] companyB has quit, mission prepare_site removed by the platform!
+[SchemeBoard] companyD6 has quit, mission fit_doors removed by the platform!
+[SchemeBoard] companyD6 has quit, mission fit_windows removed by the platform!
+[SchemeBoard] companyD3 has quit, mission paint_house removed by the platform!
+[SchemeBoard] companyE has quit, mission build_roof removed by the platform!
+[SchemeBoard] companyE has quit, mission build_walls removed by the platform!
+[SchemeBoard] companyE has quit, mission lay_floors removed by the platform!
+[SchemeBoard] giacomo has quit, mission management_of_house_building removed by the platform!

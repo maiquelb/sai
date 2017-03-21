@@ -222,8 +222,6 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 	@Override
 	public void sai_committed(String agent, String mission, String scheme) {
-		log("sai_committed: " + agent + ";" + mission + ";" + scheme + " schemeId: " + scheme.replaceAll("\"", ""));		
-		//if(getSchState().getId().equals(scheme.replaceAll("\"", ""))){
 		if(getSchState().getId().replaceAll("\"", "").equals(scheme.replaceAll("\"", ""))){
 			synchronized (commitmentsList) {
 				commitmentsList.add(new Commitment(agent, mission)); //adds to the list to be consumed by a thread
@@ -236,9 +234,8 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 	@INTERNAL_OPERATION
 	void internal_commitMission(String agent, String mission){
-		try {
-			log("internal_commitMission: " + agent + ";" + mission);		
-			this.commitMission(agent, mission);
+		try {	
+		     this.commitMission(agent, mission);
 		} catch (CartagoException e) {
 			e.printStackTrace();
 		}
@@ -334,7 +331,6 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 					synchronized (commitmentsList) {						
 						for(Commitment c:commitmentsList){
 							try {
-								log("commitment checker - " + c.getAgent()+","+c.getMission());
 								//toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+getSchState().getId()+"\"),D)[created(_)])"), new Unifier());
 								toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+","+getSchState().getId()+"),D)[created(_)])"), new Unifier());
 								//if(toCommit){
