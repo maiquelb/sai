@@ -15,3 +15,13 @@
 [JaCaMoLauncher] artifact sai: sai.bridges.jacamo.ConstitutiveArt("bh","src/org/constitutive.sai") at wsp_sai created.
 [JaCaMoLauncher] Workspace wsp_house created.
 [JaCaMoLauncher] artifact housegui: simulator.House() at wsp_house created.
+[SchemeBoard] companyD2 has quit, mission paint_house removed by the platform!
+[SchemeBoard] companyA has quit, mission install_plumbing removed by the platform!
+[SchemeBoard] companyB has quit, mission prepare_site removed by the platform!
+[SchemeBoard] companyC2 has quit, mission install_electrical_system removed by the platform!
+[SchemeBoard] companyD4 has quit, mission fit_doors removed by the platform!
+[SchemeBoard] companyD4 has quit, mission fit_windows removed by the platform!
+[SchemeBoard] companyE has quit, mission build_roof removed by the platform!
+[SchemeBoard] companyE has quit, mission build_walls removed by the platform!
+[SchemeBoard] companyE has quit, mission lay_floors removed by the platform!
+[SchemeBoard] giacomo has quit, mission management_of_house_building removed by the platform!

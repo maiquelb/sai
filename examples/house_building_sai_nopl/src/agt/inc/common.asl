@@ -27,10 +27,11 @@ i_am_winning(Art)   // check if I placed the current best bid on auction artifac
    <- println("I am obliged to ",Goal,". I found a constitutive rule that shows me. I have to produce the event ", ToDo);
       //?jcm__ws("wsp_house",WspHouse); //look to the house workspace
    	//  cartago.set_current_wsp(WspHouse);
-          joinWorkspace("wsp_auction",I);
+          joinWorkspace("wsp_house",I);
    	  lookupArtifact("housegui",House);
    	  focus(House);   	   
    	  .wait(100); //to avoid some problems: ORA4MAS seems being processing previous goal states when SAI constitutes some new achievements. To check.
+      println("going to do ", ToDo);
       ToDo[artifact_id(House)].
       
       

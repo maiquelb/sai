@@ -21,6 +21,7 @@ public class AuctionArt extends Artifact {
     @OPERATION public void bid(double bidValue) {
         ObsProperty opCurrentValue  = getObsProperty("currentBid");
         ObsProperty opCurrentWinner = getObsProperty("currentWinner");
+	//log("received bid " + bidValue + " from " + getOpUserName() + "  current Value " + getObsProperty("currentBid") + " - " + getObsProperty("currentWinner"));
         if (bidValue < opCurrentValue.doubleValue()) {  // the bid is better than the previous
             opCurrentValue.updateValue(bidValue);
             opCurrentWinner.updateValue(getOpUserName());

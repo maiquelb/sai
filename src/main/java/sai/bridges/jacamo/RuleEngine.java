@@ -77,6 +77,8 @@ public class RuleEngine extends AbstractWSPRuleEngine {
 					agent = agentId.getAgentName();
 				}
 
+				//System.out.println("[RuleEngine] processing action completed: " + fact + " by " + agent);
+
 				for(SaiEngine institution:institutions){
 					try {
 						institution.addEnvironmentalEvent(parseLiteral(fact), createAtom(agent));
@@ -146,11 +148,11 @@ public class RuleEngine extends AbstractWSPRuleEngine {
 	/*Maiquel*/    
 
 	private String propertyToPred(ArtifactId artifactId, ArtifactObsProperty property){
-		String prop = property.getName().replace("$", "S").replace("@","a");
-		prop = prop + "(" + artifactId.toString();
+		String prop = property.getName().replace("$", "S").replace("@","a").replace("-","_");
+		prop = prop + "(" + artifactId.toString().replace("-","_");
 		if(property.getValues().length>0){			
 			for(int j=0;j<property.getValues().length;j++){
-				prop = prop + "," + property.getValue(j).toString().replace("$", "S").replace("@","_at_");					
+				prop = prop + "," + property.getValue(j).toString().replace("$", "S").replace("@","_at_").replace("-","_");					
 			}
 			prop = prop + ")";
 		}
@@ -224,6 +226,7 @@ public class RuleEngine extends AbstractWSPRuleEngine {
 						engine.addEnvironmentalProperty(parseLiteral(propertyToLiteral(artifactId, property[i])));						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
+						System.out.println("Problems adding property > " + propertyToLiteral(artifactId, property[i]));
 						e.printStackTrace();
 					}
 				}

@@ -39,7 +39,7 @@ mas house_building {
       focus: wsp_sai.sai	
    }
    agent companyC {
-      instances: 5
+      instances: 3
       focus: wsp_auction.auction_for_SitePreparation
       focus: wsp_auction.auction_for_Floors
       focus: wsp_auction.auction_for_Walls
@@ -54,7 +54,7 @@ mas house_building {
       focus: wsp_sai.sai
    }
    agent companyD {
-      instances: 13
+      instances: 5
       focus: wsp_auction.auction_for_SitePreparation
         focus: wsp_auction.auction_for_Floors
         focus: wsp_auction.auction_for_Walls
