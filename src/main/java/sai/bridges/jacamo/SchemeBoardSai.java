@@ -66,7 +66,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 		final OS os = OS.loadOSFromURI(osFile);
         spec = os.getFS().findScheme(schType);
 
-		this.npl2sai = new NOpl2Sai(getNPLInterpreter());
+		this.npl2sai = new NOpl2Sai(getNormativeEngine());
 	
 		this.npl2sai.addSchemeListener(this);
 

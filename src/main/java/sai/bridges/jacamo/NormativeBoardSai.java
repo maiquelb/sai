@@ -54,7 +54,7 @@ public class NormativeBoardSai extends NormativeBoard implements INormativeBoard
             }
         }
         
-        this.npl2sai = new NOpl2Sai(getNPLInterpreter());
+        this.npl2sai = new NOpl2Sai(getNormativeEngine());
 		this.npl2sai.addNormListener(this);
 		
 		

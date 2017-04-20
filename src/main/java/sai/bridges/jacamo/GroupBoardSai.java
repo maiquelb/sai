@@ -38,7 +38,7 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 	public void init(final String osFile, final String grType) throws ParseException, MoiseException, OperationException {
 		super.init(osFile, grType);
 
-		this.npl2sai = new NOpl2Sai(getNPLInterpreter());
+		this.npl2sai = new NOpl2Sai(getNormativeEngine());
 		this.npl2sai.addGroupListener(this);
 	}
 
