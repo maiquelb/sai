@@ -26,14 +26,16 @@ mas house_building {
    
    agent companyA{   // builder agents (see their code for details)
       focus: wsp_auction.auction_for_Plumbing
+      focus: wsp_auction.clock
       focus: wsp_ora4mas.bhsch
       focus: wsp_ora4mas.hsh_group
       focus: wsp_house.housegui
       focus: wsp_sai.sai
    }
    agent companyB{
-   	  focus: wsp_auction.auction_for_SitePreparation
-   	  focus: wsp_ora4mas.bhsch
+      focus: wsp_auction.auction_for_SitePreparation
+      focus: wsp_auction.clock
+      focus: wsp_ora4mas.bhsch
       focus: wsp_ora4mas.hsh_group
       focus: wsp_house.housegui
       focus: wsp_sai.sai	
@@ -48,6 +50,7 @@ mas house_building {
       focus: wsp_auction.auction_for_Plumbing
       focus: wsp_auction.auction_for_ElectricalSystem
       focus: wsp_auction.auction_for_Painting
+      focus: wsp_auction.clock
       focus: wsp_ora4mas.bhsch
       focus: wsp_ora4mas.hsh_group
       focus: wsp_house.housegui
@@ -63,6 +66,7 @@ mas house_building {
         focus: wsp_auction.auction_for_Plumbing
         focus: wsp_auction.auction_for_ElectricalSystem
         focus: wsp_auction.auction_for_Painting
+        focus: wsp_auction.clock
         focus: wsp_ora4mas.bhsch
         focus: wsp_ora4mas.hsh_group
         focus: wsp_house.housegui
@@ -72,6 +76,7 @@ mas house_building {
    	focus: wsp_auction.auction_for_Floors
         focus: wsp_auction.auction_for_Walls
         focus: wsp_auction.auction_for_Roof
+        focus: wsp_auction.clock
         focus: wsp_ora4mas.bhsch
         focus: wsp_ora4mas.hsh_group
         focus: wsp_house.housegui
