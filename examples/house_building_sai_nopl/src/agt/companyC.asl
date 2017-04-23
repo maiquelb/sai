@@ -30,9 +30,8 @@ my_price("Painting",        1100).
       not i_am_winning(Art) &           // I am not the winner
       P < V &                           // I can offer a better bid
       can_commit                        // I can still commit to another task
-      & constitutive_rule(X,Y,T,M)&
-      nticks(AuctionTime) & AuctionTime >= 100
-   <- //.wait(2500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
+      & constitutive_rule(X,Y,T,M)
+   <- .wait(2500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
       //?jcm__ws("wsp_auction",WspAuction);
    //	  cartago.set_current_wsp(WspAuction);
       bid( P )[ artifact_id(Art) ].     // place my bid offering a cheaper service

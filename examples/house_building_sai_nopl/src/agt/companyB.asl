@@ -12,9 +12,8 @@ my_price(1500). // initial belief
 +currentBid(V)[artifact_id(Art)]        // there is a new value for current bid
     : not i_am_winning(Art) &           // I am not the winner
       my_price(P) & P < V               // I can offer a better bid
-      & constitutive_rule(X,Y,T,M)&
-      nticks(AuctionTime) & AuctionTime >= 100
-   <- //.wait(2500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
+      & constitutive_rule(X,Y,T,M)
+   <- .wait(2500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
       //?jcm__ws("wsp_auction",WspAuction); 
    	//  cartago.set_current_wsp(WspAuction);
       bid( math.max(V-150,P) ).         // place my bid offering a cheaper service
