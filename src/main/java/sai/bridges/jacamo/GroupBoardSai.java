@@ -17,12 +17,16 @@ import sai.main.institution.INormativeEngine;
 import sai.main.institution.SaiEngine;
 import sai.norms.npl.nopl2sai.IGroup2SaiListener;
 import sai.norms.npl.nopl2sai.NOpl2Sai;
+import cartago.AgentIdCredential;
 import cartago.ArtifactId;
+import cartago.CartagoContext;
 import cartago.CartagoException;
 import cartago.INTERNAL_OPERATION;
 import cartago.OPERATION;
+import cartago.Op;
 import cartago.OpFeedbackParam;
 import cartago.OperationException;
+import cartago.util.agent.ActionFailedException;
 
 public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 
@@ -33,13 +37,22 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 	private ArtifactId         parentGroup = null; //from superclass - should be protected there
 
 	private List<String>       futureSchemes = new LinkedList<String>(); // schemes to be responsible to when well formed - from superclass - should be protected there
+	
+	private CartagoContext cartagoCtx;
 
-	@Override
-	public void init(final String osFile, final String grType) throws ParseException, MoiseException, OperationException {
+	//@Override
+	public void init(final String osFile, final String grType, final String workspacename) throws ParseException, MoiseException, OperationException {
 		super.init(osFile, grType);
 
 		this.npl2sai = new NOpl2Sai(getNormativeEngine());
 		this.npl2sai.addGroupListener(this);
+		
+		cartagoCtx = new CartagoContext(new AgentIdCredential("sai__institution"), workspacename);
+		try {
+			cartagoCtx.joinWorkspace(workspacename, new AgentIdCredential("sai__institution__ag"));
+		} catch (CartagoException e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -51,13 +64,20 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 
 	@Override
 	public void sai_play(String agent, String role, String group) {
-		execInternalOp("internal_adoptRole", agent, role);
+		//execInternalOp("internal_adoptRole", agent, role);
+		try {
+			cartagoCtx.doAction(this.getId(), new Op("internal_adoptRole", new Object[] {agent, role}));
+		} catch (ActionFailedException e) {
+			e.printStackTrace();
+		} catch (CartagoException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	@INTERNAL_OPERATION
 	private void internal_adoptRole(String ag, String role){
-		adoptRole(ag, role);
+		adoptRole(ag, role);		
 	}
 
 	
@@ -158,16 +178,28 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 
 
 	@Override
-	public void sai_responsible(String group, String scheme) {		
+	public void sai_responsible(String group, String scheme) {
+		log("going to set responsible " + group + ";" + scheme);
 		if(group.replaceAll("\"", "").equals(this.getId().getName())){
 			while(!this.isWellFormed()){ //TODO: put this in a thread
+			}			
+			//execInternalOp("internal_addScheme", scheme.replaceAll("\"", ""));
+			try {
+				cartagoCtx.doAction(this.getId(), new Op("internal_addScheme", new Object[] {scheme.replaceAll("\"", "")}));
+			} catch (ActionFailedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (CartagoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			execInternalOp("internal_addScheme", scheme.replaceAll("\"", ""));
 		}
+		log("going to set responsible done " + group + ";" + scheme);
 	}
 
 	@INTERNAL_OPERATION //implemented in the superclass as the operation addScheme
 	private void internal_addScheme(String schId) {
+		log("going to set add Scheme " +schId);
 		if (!running) return;
 		CollectiveOE bak = orgState.clone();
 		try {
@@ -188,6 +220,8 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 				ArtifactId sgid = lookupArtifact(sg.getId());
 				execLinkedOp(sgid, "addScheme", schId);                
 			}
+			
+			log("going to set add Scheme Done " +schId);
 
 		} catch (NormativeFailureException e) {
 			orgState = bak; // takes the backup as the current model since the action failed

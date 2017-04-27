@@ -18,13 +18,17 @@ import java.util.logging.Logger;
 
 import sai.main.institution.INormativeEngine;
 import sai.main.institution.SaiEngine;
+import cartago.AgentIdCredential;
 import cartago.ArtifactConfig;
 import cartago.ArtifactId;
+import cartago.CartagoContext;
 import cartago.CartagoException;
 import cartago.INTERNAL_OPERATION;
 import cartago.LINK;
 import cartago.OPERATION;
+import cartago.Op;
 import cartago.OpFeedbackParam;
+import cartago.util.agent.ActionFailedException;
 import sai.main.lang.semantics.statusFunction.AgentStatusFunction;
 import sai.main.lang.semantics.statusFunction.EventStatusFunction;
 import sai.main.lang.semantics.statusFunction.StateStatusFunction;
@@ -56,11 +60,12 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 	
 	private moise.os.fs.Scheme spec; //could be protected in the superclass - requires for method UpdateRolePlayers
 
+	
+	private CartagoContext cartagoCtx;
 
 
-
-	@Override
-	public void init(final String osFile, final String schType) throws ParseException, MoiseException {
+//@Override
+	public void init(final String osFile, final String schType, final String workspacename) throws ParseException, MoiseException {
 		super.init(osFile, schType);		
 		
 		final OS os = OS.loadOSFromURI(osFile);
@@ -68,12 +73,19 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 
 		this.npl2sai = new NOpl2Sai(getNormativeEngine());
 	
-		this.npl2sai.addSchemeListener(this);
-
-
-		
+		this.npl2sai.addSchemeListener(this);		
 		 
 		commitmentChecker.start();
+		
+		cartagoCtx = new CartagoContext(new AgentIdCredential("sai__institution__sc"), workspacename);
+		try {
+			cartagoCtx.joinWorkspace(workspacename, new AgentIdCredential("sai__institution__sc"));
+		} catch (CartagoException e) {
+			e.printStackTrace();
+		}
+		
+		log("****** SchemeBoard Started *****");
+		
 	}
 
 
@@ -218,6 +230,8 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 	}
 
 */
+	
+	
 
 
 	@Override
@@ -230,19 +244,41 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 		}		
 	}
 
+	
+	
+	public void teste(Commitment c){
+		 try {
+			 	String ag = c.agent;
+			 	String mission = c.mission;
+				cartagoCtx.doAction(this.getId(), new Op("internal_commitMission", new Object[] {ag,mission}));
+			} catch (ActionFailedException e) {
+				e.printStackTrace();
+			} catch (CartagoException e) {
+				e.printStackTrace();
+			}
+	}
 
 
 	@INTERNAL_OPERATION
-	void internal_commitMission(String agent, String mission){
+	private void internal_commitMission(String agent, String mission){
 		try {	
 		     this.commitMission(agent, mission);
 		} catch (CartagoException e) {
 			e.printStackTrace();
 		}
+		/*orgState.addPlayer(agent, mission);
+		try {
+			nengine.verifyNorms();
+		} catch (NormativeFailureException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
 	}
 
 	private void commitMission(final String ag, final String mission) throws CartagoException {
-        ora4masOperationTemplate(new Operation() {
+		log("Executing commitMission " + ag + "; " + mission);
+        ora4masOperationTemplate(new Operation() {        	
             public void exec() throws NormativeFailureException, Exception {
             	//log("commitMission starting: " + ag + ";" + mission );
                 orgState.addPlayer(ag, mission);
@@ -257,6 +293,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
                 //updateMonitorScheme();
             }
         }, "Error committing to mission "+mission);
+		log("Executing commitMission Done" + ag + "; " + mission);
     }
     
 
@@ -334,7 +371,16 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 								//toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+getSchState().getId()+"\"),D)[created(_)])"), new Unifier());
 								toCommit = nengine.getAg().believes(parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+","+getSchState().getId()+"),D)[created(_)])"), new Unifier());
 								//if(toCommit){
-									execInternalOp("internal_commitMission",c.getAgent(),c.getMission());
+									//execInternalOp("internal_commitMission",c.getAgent(),c.getMission());
+									
+								//teste(c);
+								try {
+									cartagoCtx.doAction(SchemeBoardSai.this.getId(), new Op("internal_commitMission", new Object[] {c.getAgent(),c.getMission()}));
+								} catch (ActionFailedException e) {
+									e.printStackTrace();
+								} catch (CartagoException e) {
+									e.printStackTrace();
+								}
 									added.add(c);
 								/*}else{
 									log("do not believe " + parseFormula("active(obligation("+c.getAgent()+",R,committed("+c.getAgent()+","+c.getMission()+",\""+getSchState().getId()+"\"),D)[created(_)])"));

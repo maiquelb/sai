@@ -9,10 +9,25 @@
 [JaCaMoLauncher] artifact auction_for_Floors: tools.AuctionArt("Floors",1000) at wsp_auction created.
 [JaCaMoLauncher] artifact auction_for_ElectricalSystem: tools.AuctionArt("ElectricalSystem",500) at wsp_auction created.
 [JaCaMoLauncher] Workspace wsp_ora4mas created.
-[JaCaMoLauncher] artifact bhsch: sai.bridges.jacamo.SchemeBoardSai("src/org/house-os.xml",build_house_sch) at wsp_ora4mas created.
-[JaCaMoLauncher] artifact hsh_group: sai.bridges.jacamo.GroupBoardSai("src/org/house-os.xml",house_group) at wsp_ora4mas created.
+[JaCaMoLauncher] artifact bhsch: sai.bridges.jacamo.SchemeBoardSai("src/org/house-os.xml",build_house_sch,"wsp_ora4mas") at wsp_ora4mas created.
+[JaCaMoLauncher] artifact hsh_group: sai.bridges.jacamo.GroupBoardSai("src/org/house-os.xml",house_group,"wsp_ora4mas") at wsp_ora4mas created.
 [JaCaMoLauncher] Workspace wsp_sai created.
 [JaCaMoLauncher] artifact sai: sai.bridges.jacamo.ConstitutiveArt("bh","src/org/constitutive.sai") at wsp_sai created.
 [JaCaMoLauncher] Workspace wsp_house created.
 [JaCaMoLauncher] artifact housegui: simulator.House() at wsp_house created.
 [giacomo] Starting auction at 0
+[companyD4] Could not finish intention: intention 204: 
+    +schemes([bhsch])[artifact_id(cobj_20),percept_type(obs_prop),source(percept),artifact_name(cobj_20,hsh_group),workspace(cobj_20,wsp_ora4mas,cobj_6)] <- ... focus(ArtId)[wid(W)]; .concat(GroupName,".",S,NBName); lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)]; .foreach(.member(S,L),{ lookupArtifact(S,ArtId)[wid(W)]; focus(ArtId)[wid(W)]; .concat(GroupName,".",S,NBName); lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)] },java.util.ArrayList$Itr@391c108b,{GroupName=hsh_group, _409=cobj_20, W=cobj_6, L=[bhsch], _411=wsp_ora4mas, _410=cobj_20}) / {GroupName=hsh_group, S=bhsch, _409=cobj_20, W=cobj_6, ArtId=cobj_19, L=[bhsch], _411=wsp_ora4mas, _410=cobj_20}
+	Trigger: +schemes([bhsch])[artifact_id(cobj_20),code(focus(cobj_19)[wid(cobj_6)]),code_line(9),code_src("jar:file:/home/maiquel/git/jacamo/build/libs/jacamo-0.7-SNAPSHOT.jar!/templates/common-moise.asl"),error(action_failed),error_msg("Artifact Not Available."),percept_type(obs_prop),source(percept),artifact_name(cobj_20,hsh_group),workspace(cobj_20,wsp_ora4mas,cobj_6)]
+[companyD3] Could not finish intention: intention 676: 
+    +schemes([bhsch])[artifact_id(cobj_20),percept_type(obs_prop),source(percept),artifact_name(cobj_20,hsh_group),workspace(cobj_20,wsp_ora4mas,cobj_6)] <- ... focus(ArtId)[wid(W)]; .concat(GroupName,".",S,NBName); lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)]; .foreach(.member(S,L),{ lookupArtifact(S,ArtId)[wid(W)]; focus(ArtId)[wid(W)]; .concat(GroupName,".",S,NBName); lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)] },java.util.ArrayList$Itr@32edb8af,{GroupName=hsh_group, _383=cobj_20, W=cobj_6, _385=wsp_ora4mas, _384=cobj_20, L=[bhsch]}) / {GroupName=hsh_group, S=bhsch, _383=cobj_20, W=cobj_6, ArtId=cobj_19, _385=wsp_ora4mas, _384=cobj_20, L=[bhsch]}
+	Trigger: +schemes([bhsch])[artifact_id(cobj_20),code(focus(cobj_19)[wid(cobj_6)]),code_line(9),code_src("jar:file:/home/maiquel/git/jacamo/build/libs/jacamo-0.7-SNAPSHOT.jar!/templates/common-moise.asl"),error(action_failed),error_msg("Artifact Not Available."),percept_type(obs_prop),source(percept),artifact_name(cobj_20,hsh_group),workspace(cobj_20,wsp_ora4mas,cobj_6)]
+[SchemeBoard] companyA has quit, mission install_plumbing removed by the platform!
+[SchemeBoard] companyD5 has quit, mission fit_doors removed by the platform!
+[SchemeBoard] companyD5 has quit, mission fit_windows removed by the platform!
+[SchemeBoard] companyB has quit, mission prepare_site removed by the platform!
+[SchemeBoard] companyC2 has quit, mission install_electrical_system removed by the platform!
+[SchemeBoard] companyC2 has quit, mission paint_house removed by the platform!
+[SchemeBoard] companyE has quit, mission build_roof removed by the platform!
+[SchemeBoard] companyE has quit, mission build_walls removed by the platform!
+[SchemeBoard] companyE has quit, mission lay_floors removed by the platform!

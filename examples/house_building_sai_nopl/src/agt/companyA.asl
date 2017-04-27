@@ -11,12 +11,26 @@ my_price(300). // initial belief
 
 +currentBid(V)[artifact_id(Art)]         // there is a new value for current bid
     : not i_am_winning(Art)  &           // I am not the current winner
-      my_price(P) & P < V
-   <- .wait(2500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
+      my_price(P) & P < V &
+      firstBid(Bid)
+   <- //.wait(3500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
       //?jcm__ws("wsp_auction",WspAuction); //look to the SAI workspace
    //	  cartago.set_current_wsp(WspAuction);
       bid( P ).                          // place my bid offering a cheaper service
-   
+                  
+
++currentBid(V)[artifact_id(Art)]         // there is a new value for current bid
+    : not i_am_winning(Art)  &           // I am not the current winner
+      my_price(P) & P < V 
+   <- .wait(3500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
+      //?jcm__ws("wsp_auction",WspAuction); //look to the SAI workspace
+   //	  cartago.set_current_wsp(WspAuction);
+      +firstBid(P);
+      bid( P ).                          // place my bid offering a cheaper service
+                  
+
+
+
 /* plans for execution phase */
 
 { include("org_code.asl") }
