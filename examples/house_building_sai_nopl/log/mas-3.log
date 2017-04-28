@@ -15,15 +15,4 @@
 [JaCaMoLauncher] artifact sai: sai.bridges.jacamo.ConstitutiveArt("bh","src/org/constitutive.sai") at wsp_sai created.
 [JaCaMoLauncher] Workspace wsp_house created.
 [JaCaMoLauncher] artifact housegui: simulator.House() at wsp_house created.
-[giacomo] Starting auction at 0
-[companyC2] Could not finish intention: intention 390: 
-    +schemes([bhsch])[artifact_id(cobj_20),percept_type(obs_prop),source(percept),artifact_name(cobj_20,hsh_group),workspace(cobj_20,wsp_ora4mas,cobj_6)] <- ... focus(ArtId)[wid(W)]; .concat(GroupName,".",S,NBName); lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)]; .foreach(.member(S,L),{ lookupArtifact(S,ArtId)[wid(W)]; focus(ArtId)[wid(W)]; .concat(GroupName,".",S,NBName); lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)] },java.util.ArrayList$Itr@601941cd,{GroupName=hsh_group, _280=cobj_20, _281=wsp_ora4mas, W=cobj_6, L=[bhsch], _279=cobj_20}) / {GroupName=hsh_group, _280=cobj_20, S=bhsch, _281=wsp_ora4mas, W=cobj_6, ArtId=cobj_19, L=[bhsch], _279=cobj_20}
-	Trigger: +schemes([bhsch])[artifact_id(cobj_20),code(focus(cobj_19)[wid(cobj_6)]),code_line(9),code_src("jar:file:/home/maiquel/git/jacamo/build/libs/jacamo-0.7-SNAPSHOT.jar!/templates/common-moise.asl"),error(action_failed),error_msg("Artifact Not Available."),percept_type(obs_prop),source(percept),artifact_name(cobj_20,hsh_group),workspace(cobj_20,wsp_ora4mas,cobj_6)]
-[SchemeBoard] companyD2 has quit, mission paint_house removed by the platform!
-[SchemeBoard] companyA has quit, mission install_plumbing removed by the platform!
-[SchemeBoard] companyB has quit, mission prepare_site removed by the platform!
-[SchemeBoard] companyC2 has quit, mission install_electrical_system removed by the platform!
-[SchemeBoard] companyD3 has quit, mission fit_doors removed by the platform!
-[SchemeBoard] companyD3 has quit, mission fit_windows removed by the platform!
-[SchemeBoard] companyE has quit, mission build_roof removed by the platform!
-[SchemeBoard] companyE has quit, mission build_walls removed by the platform!
+[giacomo] Starting auction at 10

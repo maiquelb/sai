@@ -11,6 +11,13 @@ import jason.RevisionFailedException;
 import jason.asSemantics.Unifier;
 import jason.asSyntax.parser.ParseException;
 
+
+/**
+ * This class implements a console for using the JasonReasoner
+ * @author maiquel
+ *
+ */
+
 public class ReasonerConsole {
 
 	static JasonReasoner reasoner = new JasonReasoner();

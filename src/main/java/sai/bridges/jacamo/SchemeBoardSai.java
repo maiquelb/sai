@@ -238,7 +238,9 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 	public void sai_committed(String agent, String mission, String scheme) {
 		if(getSchState().getId().replaceAll("\"", "").equals(scheme.replaceAll("\"", ""))){
 			synchronized (commitmentsList) {
-				commitmentsList.add(new Commitment(agent, mission)); //adds to the list to be consumed by a thread
+				Commitment c = new Commitment(agent, mission);
+				if(!commitmentsList.contains(c))
+				   commitmentsList.add(c); //adds to the list to be consumed by a thread
 			}			
 			commitmentChecker.interrupt();
 		}		
@@ -322,6 +324,19 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 		public String toString() {
 			return "Commitment [agent=" + agent + ", mission=" + mission + "]";
 		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (!(obj instanceof Commitment)) { return false;}
+			Commitment c = (Commitment) obj;
+			if(!c.getAgent().equals(this.getAgent())&&c.getMission().equals(this.getMission()))
+				return false;
+				
+			return true;
+		}
+		
+		
+		
 
 	}
 
