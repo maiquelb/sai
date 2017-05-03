@@ -7,12 +7,22 @@
 
 
 
-+task(S)[artifact_id(Art)]: constitutive_rule(X,Y,T,M)
++task(S)[artifact_id(Art)]:
+   hasBidden(Bid)                    //this is not the first bid, then it is possible to bit immediately 
+   <- .wait(math.random(500)+50);
+      Bid = math.floor(math.random(10000))+800;     
+      +hasBidden(Bid); 
+      bid( Bid )[artifact_id(Art)]. // recall that the artifact ignores if this
+	                                // agent places a bid that is higher than
+									// the current bid
+
+
+
++task(S)[artifact_id(Art)]
    <- .wait(math.random(500)+50);
       Bid = math.floor(math.random(10000))+800;
-      .wait(3500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
-      //?jcm__ws("wsp_auction",WspAuction);
-   	//  cartago.set_current_wsp(WspAuction);
+      .wait(4500); //as it is the first bid, agents wait a time before start bidding to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
+      +hasBidden(Bid); 
       bid( Bid )[artifact_id(Art)]. // recall that the artifact ignores if this
 	                                // agent places a bid that is higher than
 									// the current bid

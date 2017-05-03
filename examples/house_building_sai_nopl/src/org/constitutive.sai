@@ -19,40 +19,40 @@ constitutive_rules:
 /*Rules 2 to 10: The state where the property currentWinner(Auction,Agent) holds counts as Agent playing some role in the house building.*/
 2: currentWinner(auction_for_SitePreparation,Agent)
    count-as play(Agent,site_prep_contractor,"hsh_group")
-   while nticks(clock,Time)&(Time>=20000).
+   while nticks(clock,Time)&(Time>=8000).
 
 3: currentWinner(auction_for_Floors,Agent)
    count-as play(Agent,bricklayer,"hsh_group")
-   while nticks(clock,Time)&(Time>=20000).
+   while nticks(clock,Time)&(Time>=8000).
 
 
 4: currentWinner(auction_for_Walls,Agent)
    count-as play(Agent,bricklayer,"hsh_group")
-   while nticks(clock,Time)&(Time>=20000).
+   while nticks(clock,Time)&(Time>=8000).
 
 5: currentWinner(auction_for_Roof,Agent)
    count-as play(Agent,roofer,"hsh_group")
-   while nticks(clock,Time)&(Time>=20000).
+   while nticks(clock,Time)&(Time>=8000).
 
 6: currentWinner(auction_for_WindowsDoors,Agent)
    count-as play(Agent,window_fitter,"hsh_group")
-   while nticks(clock,Time)&(Time>=20000).
+   while nticks(clock,Time)&(Time>=8000).
 
 7: currentWinner(auction_for_WindowsDoors,Agent)
    count-as play(Agent,door_fitter,"hsh_group")
-   while nticks(clock,Time)&(Time>=20000).
+   while nticks(clock,Time)&(Time>=8000).
 
 8: currentWinner(auction_for_Plumbing,Agent)
    count-as play(Agent,plumber,"hsh_group")
-   while nticks(clock,Time)&(Time>=20000).
+   while nticks(clock,Time)&(Time>=8000).
 
 9: currentWinner(auction_for_ElectricalSystem,Agent)
    count-as play(Agent,electrician,"hsh_group")
-   while nticks(clock,Time)&(Time>=20000).
+   while nticks(clock,Time)&(Time>=8000).
 
 10: currentWinner(auction_for_Painting,Agent)
     count-as play(Agent,painter,"hsh_group")
-    while nticks(clock,Time)&(Time>=20000).
+    while nticks(clock,Time)&(Time>=8000).
 
 /* Defining what counts as, from the instituional perspective, a well formed group. This constitution is necessary to constitute the commitments */
 11: count-as responsible("hsh_group","bhsch")

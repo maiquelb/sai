@@ -82,9 +82,7 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 			cartagoCtx.joinWorkspace(workspacename, new AgentIdCredential("sai__institution__sc"));
 		} catch (CartagoException e) {
 			e.printStackTrace();
-		}
-		
-		log("****** SchemeBoard Started *****");
+		}		
 		
 	}
 
@@ -279,7 +277,6 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
 	}
 
 	private void commitMission(final String ag, final String mission) throws CartagoException {
-		log("Executing commitMission " + ag + "; " + mission);
         ora4masOperationTemplate(new Operation() {        	
             public void exec() throws NormativeFailureException, Exception {
             	//log("commitMission starting: " + ag + ";" + mission );
@@ -295,7 +292,6 @@ public class SchemeBoardSai extends SchemeBoard implements IScheme2SaiListener{
                 //updateMonitorScheme();
             }
         }, "Error committing to mission "+mission);
-		log("Executing commitMission Done" + ag + "; " + mission);
     }
     
 

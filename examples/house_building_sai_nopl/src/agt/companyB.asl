@@ -11,21 +11,16 @@ my_price(1500). // initial belief
 
 +currentBid(V)[artifact_id(Art)]        // there is a new value for current bid
     : not i_am_winning(Art) &           // I am not the winner
-      my_price(P) & P < V &               // I can offer a better bid
-      firstBid(Bid)
-   <- //.wait(3500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
-      //?jcm__ws("wsp_auction",WspAuction); 
-   	//  cartago.set_current_wsp(WspAuction);
-      bid( math.max(V-150,P) ).         // place my bid offering a cheaper service
+      my_price(P) & P < V &             // I can offer a better bid
+      hasBidden(Bid)                    //this is not the first bid, then it is possible to bit immediately 
+   <- bid( math.max(V-150,P) ).         // place my bid offering a cheaper service
 
 
 +currentBid(V)[artifact_id(Art)]        // there is a new value for current bid
     : not i_am_winning(Art) &           // I am not the winner
       my_price(P) & P < V               // I can offer a better bid
-   <- .wait(3500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
-      //?jcm__ws("wsp_auction",WspAuction); 
-   	//  cartago.set_current_wsp(WspAuction);
-      +firstBid(math.max(V-150,P));
+   <- .wait(4500); //as it is the first bid, agents wait a time before start bidding t ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
+      +hasBidden(math.max(V-150,P));
       bid( math.max(V-150,P) ).         // place my bid offering a cheaper service
 
 

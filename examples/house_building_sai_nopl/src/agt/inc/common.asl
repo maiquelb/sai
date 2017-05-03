@@ -31,7 +31,6 @@ i_am_winning(Art)   // check if I placed the current best bid on auction artifac
    	  lookupArtifact("housegui",House);
    	  focus(House);   	   
    	  .wait(100); //to avoid some problems: ORA4MAS seems being processing previous goal states when SAI constitutes some new achievements. To check.
-      println("going to do ", ToDo);
       ToDo[artifact_id(House)].
       
       

@@ -114,7 +114,7 @@ number_of_tasks(NS) :- .findall( S, task(S), L) & .length(L,NS).
 +!contract: constitutive_rule(X,Y,T,M)
   <- ?nticks(Starting_Auction_Time);
      +starting_auction_time(Starting_Auction_Time);
-     .print("Starting auction at ", Starting_Auction_Time);
+     //.print("Starting auction at ", Starting_Auction_Time);
      !wait_for_bids.
 
 +!contract
@@ -124,9 +124,8 @@ number_of_tasks(NS) :- .findall( S, task(S), L) & .length(L,NS).
 -!contract
    <- .print("Error on contract").
    
-+!wait_for_bids:nticks(X)&starting_auction_time(Starting_Auction_Time) & (X-Starting_Auction_Time)>=20000 // use an internal deadline of 5 seconds to close the auctions
++!wait_for_bids:nticks(X)&(X>=8000) // use an internal deadline of 5 seconds to close the auctions
    <-   joinWorkspace("wsp_auction",I);
-      //?jcm__art("clock", Clock);
       stop[artifact_id(Clock)];
       !show_winners;
       .
@@ -134,7 +133,7 @@ number_of_tasks(NS) :- .findall( S, task(S), L) & .length(L,NS).
 +!wait_for_bids
    <- ?nticks(X);
       ?starting_auction_time(Starting_Auction_Time)
-      println("Waiting the bids ", 20000-(X-Starting_Auction_Time)," seconds...");
+      println("Waiting the bids ", 8000-X," seconds...");
       .wait(1000); 
       !wait_for_bids;
       .

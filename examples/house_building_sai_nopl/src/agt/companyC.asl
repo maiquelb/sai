@@ -29,12 +29,9 @@ my_price("Painting",        1100).
       my_price(S,P) &                   // get my valuation for this service
       not i_am_winning(Art) &           // I am not the winner
       P < V &                           // I can offer a better bid
-      can_commit &                       // I can still commit to another task
-      firstBid(Bid)
-   <- //.wait(3500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
-      //?jcm__ws("wsp_auction",WspAuction);
-   //	  cartago.set_current_wsp(WspAuction);     
-      bid( P )[ artifact_id(Art) ].     // place my bid offering a cheaper service
+      can_commit &                      // I can still commit to another task
+      hasBidden(Bid)                    //this is not the first bid, then it is possible to bit immediately 
+   <- bid( P )[ artifact_id(Art) ].     // place my bid offering a cheaper service
 
 //@lbo[atomic] // atomic to ensure it still winning less than two when the bid is placed
 +currentBid(V)[artifact_id(Art)]        // there is a new value for current bid
@@ -43,10 +40,8 @@ my_price("Painting",        1100).
       not i_am_winning(Art) &           // I am not the winner
       P < V &                           // I can offer a better bid
       can_commit
-   <- .wait(3500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
-      //?jcm__ws("wsp_auction",WspAuction);
-   //	  cartago.set_current_wsp(WspAuction); 
-      +firstBid(P);    
+   <- .wait(4500); //as it is the first bid, agents wait a time before start bidding to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
+      +hasBidden(P);    
       bid( P )[ artifact_id(Art) ].     // place my bid offering a cheaper service
 
 

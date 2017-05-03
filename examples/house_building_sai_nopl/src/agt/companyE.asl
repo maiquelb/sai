@@ -24,11 +24,23 @@ sum_of_my_offers(S) :-
       my_price(P) &
 	  sum_of_my_offers(Sum) &
 	  task(S)[artifact_id(Art)] &
-	  P < Sum + V                     // I can still offer a better bid
-          & constitutive_rule(X,Y,T,M)
-   <- .wait(3500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
+	  P < Sum + V &                    // I can still offer a better bid
+          hasBidden(Bid)                    //this is not the first bid, then it is possible to bit immediately 
+   <- //.wait(3500); //agents wait a time before to bid to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
       //?jcm__ws("wsp_auction",WspAuction);
    	//  cartago.set_current_wsp(WspAuction);
+      bid( math.max(V-10,P) )[ artifact_id(Art) ].  // place my bid offering a cheaper service
+   
+
+
++currentBid(V)[artifact_id(Art)]      // there is a new value for current bid
+    : not i_am_winning(Art) &         // I am not the winner
+      my_price(P) &
+	  sum_of_my_offers(Sum) &
+	  task(S)[artifact_id(Art)] &
+	  P < Sum + V 
+   <- .wait(4500); //as it is the first bid, agents wait a time before start bidding to ensure that all the infrastructure, namely, the link between SAI and CArtAgO, is ready
+      +hasBidden(Bid); 
       bid( math.max(V-10,P) )[ artifact_id(Art) ].  // place my bid offering a cheaper service
    
 /* plans for execution phase */

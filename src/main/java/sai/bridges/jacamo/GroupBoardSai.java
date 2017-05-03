@@ -178,8 +178,7 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 
 
 	@Override
-	public void sai_responsible(String group, String scheme) {
-		log("going to set responsible " + group + ";" + scheme);
+	public void sai_responsible(String group, String scheme) {		
 		if(group.replaceAll("\"", "").equals(this.getId().getName())){
 			while(!this.isWellFormed()){ //TODO: put this in a thread
 			}			
@@ -193,13 +192,11 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		log("going to set responsible done " + group + ";" + scheme);
+		}		
 	}
 
 	@INTERNAL_OPERATION //implemented in the superclass as the operation addScheme
-	private void internal_addScheme(String schId) {
-		log("going to set add Scheme " +schId);
+	private void internal_addScheme(String schId) {		
 		if (!running) return;
 		CollectiveOE bak = orgState.clone();
 		try {
@@ -221,7 +218,7 @@ public class GroupBoardSai extends GroupBoard implements IGroup2SaiListener {
 				execLinkedOp(sgid, "addScheme", schId);                
 			}
 			
-			log("going to set add Scheme Done " +schId);
+			
 
 		} catch (NormativeFailureException e) {
 			orgState = bak; // takes the backup as the current model since the action failed

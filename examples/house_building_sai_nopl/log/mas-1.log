@@ -15,12 +15,3 @@
 [JaCaMoLauncher] artifact sai: sai.bridges.jacamo.ConstitutiveArt("bh","src/org/constitutive.sai") at wsp_sai created.
 [JaCaMoLauncher] Workspace wsp_house created.
 [JaCaMoLauncher] artifact housegui: simulator.House() at wsp_house created.
-[giacomo] Starting auction at 0
-[companyD3] Could not finish intention: intention 100: 
-    +schemes([bhsch])[artifact_id(cobj_20),percept_type(obs_prop),source(percept),artifact_name(cobj_20,hsh_group),workspace(cobj_20,wsp_ora4mas,cobj_6)] <- ... lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)]; .foreach(.member(S,L),{ lookupArtifact(S,ArtId)[wid(W)]; focus(ArtId)[wid(W)]; .concat(GroupName,".",S,NBName); lookupArtifact(NBName,NBId)[wid(W)]; focus(NBId)[wid(W)] },java.util.ArrayList$Itr@1657dc38,{GroupName=hsh_group, W=cobj_6, _365=wsp_ora4mas, _364=cobj_20, _363=cobj_20, L=[bhsch]}) / {GroupName=hsh_group, S=bhsch, W=cobj_6, ArtId=cobj_19, _365=wsp_ora4mas, _364=cobj_20, _363=cobj_20, L=[bhsch], NBName="hsh_group.bhsch"}
-	Trigger: +schemes([bhsch])[artifact_id(cobj_20),code(lookupArtifact("hsh_group.bhsch",_80686)[wid(cobj_6)]),code_line(11),code_src("jar:file:/home/maiquel/git/jacamo/build/libs/jacamo-0.7-SNAPSHOT.jar!/templates/common-moise.asl"),error(action_failed),error_msg("cartago.ArtifactNotAvailableException"),percept_type(obs_prop),source(percept),artifact_name(cobj_20,hsh_group),workspace(cobj_20,wsp_ora4mas,cobj_6)]
-[SchemeBoard] companyA has quit, mission install_plumbing removed by the platform!
-[SchemeBoard] companyC2 has quit, mission fit_doors removed by the platform!
-[SchemeBoard] companyC2 has quit, mission fit_windows removed by the platform!
-[SchemeBoard] companyC2 has quit, mission install_electrical_system removed by the platform!
-[SchemeBoard] companyC2 has quit, mission paint_house removed by the platform!
