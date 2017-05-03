@@ -112,5 +112,5 @@ mas house_building {
     
    asl-path:  src/agt, src/agt/inc
    
-   platform: cartago("infrastructure")
+   //platform: cartago("infrastructure")
 }

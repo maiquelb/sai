@@ -1,4 +1,4 @@
-// Generated from sai_constitutive.g by ANTLR 4.6
+// Generated from grammar/sai_constitutive.g by ANTLR 4.7
 
 package sai.main.lang.parser;
 
@@ -14,7 +14,7 @@ import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class sai_constitutiveLexer extends Lexer {
-	static { RuntimeMetaData.checkVersion("4.6", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -25,6 +25,10 @@ public class sai_constitutiveLexer extends Lexer {
 		T__17=18, T__18=19, T__19=20, TK_OR=21, TK_AND=22, TK_REL_OP=23, TK_IS=24, 
 		STRING=25, NEGATION=26, TK_NEG=27, INTDIV=28, INTMOD=29, ATOM=30, VAR=31, 
 		DIGIT=32, TERM_NULL=33, COMMENT_STAT=34, WS=35;
+	public static String[] channelNames = {
+		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
+	};
+
 	public static String[] modeNames = {
 		"DEFAULT_MODE"
 	};
@@ -102,6 +106,8 @@ public class sai_constitutiveLexer extends Lexer {
 	@Override
 	public String getSerializedATN() { return _serializedATN; }
 
+	public String[] getChannelNames() { return channelNames; }
+
 	@Override
 	public String[] getModeNames() { return modeNames; }
 
@@ -125,7 +131,7 @@ public class sai_constitutiveLexer extends Lexer {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\2%\u0127\b\1\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2%\u0127\b\1\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -148,15 +154,15 @@ public class sai_constitutiveLexer extends Lexer {
 		"\3#\3#\3#\3#\3$\6$\u0122\n$\r$\16$\u0123\3$\3$\3\u0118\2%\3\3\5\4\7\5"+
 		"\t\6\13\7\r\b\17\t\21\n\23\13\25\f\27\r\31\16\33\17\35\20\37\21!\22#\23"+
 		"%\24\'\25)\26+\27-\30/\31\61\32\63\33\65\34\67\359\36;\37= ?!A\"C#E$G"+
-		"%\3\2\6\4\2\"\"\61\61\4\2C\\c|\5\2&&BBaa\5\2\f\f\17\17\"\"\u013c\2\3\3"+
-		"\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2\2\2\r\3\2\2\2\2"+
-		"\17\3\2\2\2\2\21\3\2\2\2\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2\2\2\31\3"+
-		"\2\2\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2\2#\3\2\2\2\2"+
-		"%\3\2\2\2\2\'\3\2\2\2\2)\3\2\2\2\2+\3\2\2\2\2-\3\2\2\2\2/\3\2\2\2\2\61"+
-		"\3\2\2\2\2\63\3\2\2\2\2\65\3\2\2\2\2\67\3\2\2\2\29\3\2\2\2\2;\3\2\2\2"+
-		"\2=\3\2\2\2\2?\3\2\2\2\2A\3\2\2\2\2C\3\2\2\2\2E\3\2\2\2\2G\3\2\2\2\3I"+
-		"\3\2\2\2\5X\3\2\2\2\7Z\3\2\2\2\t\\\3\2\2\2\13m\3\2\2\2\rt\3\2\2\2\17v"+
-		"\3\2\2\2\21}\3\2\2\2\23\u0084\3\2\2\2\25\u0097\3\2\2\2\27\u00a0\3\2\2"+
+		"%\3\2\6\4\2\"\"\61\61\4\2C\\c|\5\2&&BBaa\5\2\f\f\17\17\"\"\2\u013c\2\3"+
+		"\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2\2\2\r\3\2\2\2"+
+		"\2\17\3\2\2\2\2\21\3\2\2\2\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2\2\2\31"+
+		"\3\2\2\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2\2#\3\2\2\2"+
+		"\2%\3\2\2\2\2\'\3\2\2\2\2)\3\2\2\2\2+\3\2\2\2\2-\3\2\2\2\2/\3\2\2\2\2"+
+		"\61\3\2\2\2\2\63\3\2\2\2\2\65\3\2\2\2\2\67\3\2\2\2\29\3\2\2\2\2;\3\2\2"+
+		"\2\2=\3\2\2\2\2?\3\2\2\2\2A\3\2\2\2\2C\3\2\2\2\2E\3\2\2\2\2G\3\2\2\2\3"+
+		"I\3\2\2\2\5X\3\2\2\2\7Z\3\2\2\2\t\\\3\2\2\2\13m\3\2\2\2\rt\3\2\2\2\17"+
+		"v\3\2\2\2\21}\3\2\2\2\23\u0084\3\2\2\2\25\u0097\3\2\2\2\27\u00a0\3\2\2"+
 		"\2\31\u00a5\3\2\2\2\33\u00ab\3\2\2\2\35\u00ad\3\2\2\2\37\u00af\3\2\2\2"+
 		"!\u00b1\3\2\2\2#\u00b3\3\2\2\2%\u00b5\3\2\2\2\'\u00b7\3\2\2\2)\u00b9\3"+
 		"\2\2\2+\u00bb\3\2\2\2-\u00bd\3\2\2\2/\u00ce\3\2\2\2\61\u00d0\3\2\2\2\63"+

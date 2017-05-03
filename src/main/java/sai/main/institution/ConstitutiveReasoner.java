@@ -9,6 +9,7 @@ import jason.asSyntax.Pred;
 import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import sai.util.reasoner.BasicReasonerHttpGUI;
 import sai.util.reasoner.jason.JasonReasoner;
@@ -30,7 +31,8 @@ public class ConstitutiveReasoner extends Thread {
 	private AbstractQueue<Literal> queue;
 	private int globalCicle = 0;
 	private SaiLogger logger = SaiLogger.getInstance();
-	private ArrayList<ConstitutiveListener> constitutiveListeners = new ArrayList<ConstitutiveListener>();
+	//private ArrayList<ConstitutiveListener> constitutiveListeners = new ArrayList<ConstitutiveListener>();
+	private CopyOnWriteArrayList<ConstitutiveListener> constitutiveListeners = new CopyOnWriteArrayList<ConstitutiveListener>();
 	//private NormativeReasoner2Sai norm2sai = NormativeReasoner2Sai.getInstance();
 	private ArrayList<INormativeEngine> normativeEngines = new ArrayList<INormativeEngine>(); //the list of normative engines on top of the constitutive state
 

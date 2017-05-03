@@ -2,17 +2,18 @@ This is a "sitauted" version of the classical house_built example.
 The dynamic facts that animate the NOPL dynamics are constituted from the environment instead of being produced by operations in the artifacts.
 The constitutive specification is in /src/org/constitutive.sai
 
+* Before running: copy the file antlr-runtime-4.7.jar to the JACAMO_HOME directory. Such file is available in the /build/libs directory of the sai package.
 
 
-To run this example: in a terminal, type ant	
-
-IMPORTANT: to keep the proper running settings, namely, the CArtAgO version that supports to catch environmental events, do not launch it by the JaCaMo Eclipse plugin. (To be changed soon). 
+* Running the example: (i) Import the project as a JaCaMo project in Eclipse and run it as usual  or (ii) in a terminal, type jacamo house.jcm
 
 
-While the example is running:
 
- To check the constitutive state, go to
-   - http://localhost:3275/bh
+* While the example is running: To check the constitutive state, go to http://localhost:3275/bh
 
- The normative state can be checked in the Organisation Inspector, as usual in JaCaMo applications
+
+* The normative state can be checked in the Organisation Inspector, as usual in JaCaMo applications
+
+
+* Known problems: sometimes the agents start to act in the environment placing bids before the SAI engine is ready. As a consequence, some status functions are not constituted and the Moise group is not well formed after the action being finished. 
 

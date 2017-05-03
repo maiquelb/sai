@@ -1,4 +1,4 @@
-// Generated from sai_constitutive.g by ANTLR 4.6
+// Generated from grammar/sai_constitutive.g by ANTLR 4.7
 
 package sai.main.lang.parser;
 
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class sai_constitutiveParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.6", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -2189,7 +2189,7 @@ public class sai_constitutiveParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3%\u0121\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3%\u0121\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2211,11 +2211,11 @@ public class sai_constitutiveParser extends Parser {
 		"#\6#\u0101\n#\r#\16#\u0102\3#\3#\5#\u0107\n#\3#\3#\3#\3#\5#\u010d\n#\3"+
 		"$\3$\3%\3%\3%\3%\7%\u0115\n%\f%\16%\u0118\13%\3%\3%\3&\3&\3&\5&\u011f"+
 		"\n&\3&\2\2\'\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64"+
-		"\668:<>@BDFHJ\2\5\3\2\31\32\3\2\17\20\4\2\21\22\36\37\u011f\2L\3\2\2\2"+
-		"\4R\3\2\2\2\6W\3\2\2\2\b`\3\2\2\2\ne\3\2\2\2\fm\3\2\2\2\16r\3\2\2\2\20"+
-		"z\3\2\2\2\22\177\3\2\2\2\24\u0087\3\2\2\2\26\u008e\3\2\2\2\30\u009a\3"+
-		"\2\2\2\32\u009f\3\2\2\2\34\u00a4\3\2\2\2\36\u00a8\3\2\2\2 \u00aa\3\2\2"+
-		"\2\"\u00ad\3\2\2\2$\u00b0\3\2\2\2&\u00b2\3\2\2\2(\u00b4\3\2\2\2*\u00b6"+
+		"\668:<>@BDFHJ\2\5\3\2\31\32\3\2\17\20\4\2\21\22\36\37\2\u011f\2L\3\2\2"+
+		"\2\4R\3\2\2\2\6W\3\2\2\2\b`\3\2\2\2\ne\3\2\2\2\fm\3\2\2\2\16r\3\2\2\2"+
+		"\20z\3\2\2\2\22\177\3\2\2\2\24\u0087\3\2\2\2\26\u008e\3\2\2\2\30\u009a"+
+		"\3\2\2\2\32\u009f\3\2\2\2\34\u00a4\3\2\2\2\36\u00a8\3\2\2\2 \u00aa\3\2"+
+		"\2\2\"\u00ad\3\2\2\2$\u00b0\3\2\2\2&\u00b2\3\2\2\2(\u00b4\3\2\2\2*\u00b6"+
 		"\3\2\2\2,\u00b8\3\2\2\2.\u00ba\3\2\2\2\60\u00bc\3\2\2\2\62\u00be\3\2\2"+
 		"\2\64\u00c3\3\2\2\2\66\u00c8\3\2\2\28\u00cd\3\2\2\2:\u00d2\3\2\2\2<\u00d8"+
 		"\3\2\2\2>\u00e9\3\2\2\2@\u00f0\3\2\2\2B\u00f4\3\2\2\2D\u010c\3\2\2\2F"+
