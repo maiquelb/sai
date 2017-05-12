@@ -1,4 +1,4 @@
-This is a "sitauted" version of the classical house_built example. 
+This is a "situated" version of the classical house_built example.
 The dynamic facts that animate the NOPL dynamics are constituted from the environment instead of being produced by operations in the artifacts.
 The constitutive specification is in /src/org/constitutive.sai
 
@@ -15,5 +15,4 @@ The constitutive specification is in /src/org/constitutive.sai
 * The normative state can be checked in the Organisation Inspector, as usual in JaCaMo applications
 
 
-* Known problems: sometimes the agents start to act in the environment placing bids before the SAI engine is ready. As a consequence, some status functions are not constituted and the Moise group is not well formed after the action being finished. 
-
+* Known problems: sometimes the agents start to act in the environment placing bids before the SAI engine is ready. As a consequence, some status functions are not constituted and the Moise group is not well formed after the action being finished.
