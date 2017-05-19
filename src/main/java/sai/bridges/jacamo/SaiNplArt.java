@@ -37,6 +37,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import sai.main.institution.INormativeEngine;
+import sai.main.institution.SaiEngine;
 import sai.main.lang.parser.sai_constitutiveLexer;
 import sai.main.lang.parser.sai_constitutiveListenerImpl;
 import sai.main.lang.parser.sai_constitutiveParser;
@@ -80,6 +81,8 @@ public class SaiNplArt extends Artifact implements npl.NormativeListener  {
 	ArrayList<Literal> obligationsToShow = new ArrayList<Literal>();
 	ArrayList<Literal> fulfillmentsToShow = new ArrayList<Literal>();
 	ArrayList<Literal> deactivationsToShow = new ArrayList<Literal>();
+	
+	private SaiEngine institution;
 
 
 	
@@ -110,6 +113,12 @@ public class SaiNplArt extends Artifact implements npl.NormativeListener  {
 			e1.printStackTrace();
 		}						
 	}
+	
+	@OPERATION
+    public void setInstitution(SaiEngine institution){
+    	this.institution = institution;
+    	institution.addNormativeEngine(this.npl2sai);
+    }
 
 	//hardcoding norms to test...
 	//TODO: create an parser for NPL programs
@@ -117,7 +126,10 @@ public class SaiNplArt extends Artifact implements npl.NormativeListener  {
 		nengine.init();
 		Npl2Sai npl2sai = new Npl2Sai(nengine);
 		Norm n1, n2, n3, n4, n5;
-		TimeTerm t1 = new TimeTerm(1, "never");
+		//TimeTerm t1 = new TimeTerm(1, "never");
+		TimeTerm t1 = new TimeTerm(10, "year");
+		log("T1: " + t1);
+		
 
 		try {
 			instProgram.addStatusFunction(new EventStatusFunction(new Pred(parseLiteral("tangibleInteraction(Table,TangibleObject,X,Y,Actor)"))));
@@ -129,21 +141,31 @@ public class SaiNplArt extends Artifact implements npl.NormativeListener  {
 
 
 		try {
-			n1 = new NormSai("n1", parseLiteral("obligation(mayor,n1,evacuate(Zone),"+t1+")"), parseFormula("secure(Zone)"),this.instProgram);
+			//n1 = new NormSai("n1", parseLiteral("obligation(mayor,n1,evacuate(Zone),"+t1+")"), parseFormula("secure(Zone)"),this.instProgram);
+			n1 = new NormSai("n1", parseLiteral("obligation(mayor,true,evacuate(Zone),"+Long.MAX_VALUE+")"), parseFormula("secure(Zone)"),this.instProgram);
 			scope.addNorm(n1);
-			n2 = new NormSai("n2", parseLiteral("obligation(firefighter,n2,evacuate(Zone),"+t1+")"), parseFormula("insecure(Zone)"),this.instProgram);
+			n2 = new NormSai("n2", parseLiteral("obligation(firefighter,insecure(Zone),evacuate(Zone),"+"999999999"+")"), parseFormula("insecure(Zone)"),this.instProgram);
 			scope.addNorm(n2);
-			n3 = new NormSai("n3", parseLiteral("obligation(interaction_inspector,n3,inform_invalid_evacuation(Zone, firefighter),"+t1+")"), parseFormula("secure(Zone)&sai__event(evacuate(Zone)[sai__agent(TriggerAgent)])&sai__is(TriggerAgent,firefighter)"),this.instProgram);
+			//n3 = new NormSai("n3", parseLiteral("obligation(interaction_inspector,n3,inform_invalid_evacuation(Zone, firefighter),"+t1+")"), parseFormula("secure(Zone)&sai__event(evacuate(Zone)[sai__agent(TriggerAgent)])&sai__is(TriggerAgent,firefighter)"),this.instProgram);
+			n3 = new NormSai("n3", parseLiteral("obligation(interaction_inspector,n3,inform_invalid_evacuation(Zone, firefighter),"+Long.MAX_VALUE+")"), parseFormula("secure(Zone)&sai__event(evacuate(Zone)[sai__agent(TriggerAgent)])&sai__is(TriggerAgent,firefighter)"),this.instProgram);
 			scope.addNorm(n3);
-			n4 = new NormSai("n4", parseLiteral("obligation(interaction_inspector,n4,inform_invalid_evacuation(Zone, mayor),"+t1+")"), parseFormula("insecure(Zone)&sai__event(evacuate(zone)[sai__agent(TriggerAgent)])&sai__is(TriggerAgent,mayor)"),this.instProgram);
+			//n4 = new NormSai("n4", parseLiteral("obligation(interaction_inspector,n4,inform_invalid_evacuation(Zone, mayor),"+t1+")"), parseFormula("insecure(Zone)&sai__event(evacuate(zone)[sai__agent(TriggerAgent)])&sai__is(TriggerAgent,mayor)"),this.instProgram);
+			n4 = new NormSai("n4", parseLiteral("obligation(interaction_inspector,n4,inform_invalid_evacuation(Zone, mayor),"+Long.MAX_VALUE+")"), parseFormula("insecure(Zone)&sai__event(evacuate(zone)[sai__agent(TriggerAgent)])&sai__is(TriggerAgent,mayor)"),this.instProgram);
 			scope.addNorm(n4);
-			n5 = new NormSai("n5", parseLiteral("obligation(table_mediator,n5,informTangibleInteraction(SourceTable,TangibleObject,X,Y),"+t1+")"), parseFormula("sai__event(tangibleInteraction(SourceTable,TangibleObject,X,Y,_)[sai__agent(_)])"),this.instProgram);
+			//n5 = new NormSai("n5", parseLiteral("obligation(table_mediator,n5,informTangibleInteraction(SourceTable,TangibleObject,X,Y),"+t1+")"), parseFormula("sai__event(tangibleInteraction(SourceTable,TangibleObject,X,Y,_)[sai__agent(_)])"),this.instProgram);
+			n5 = new NormSai("n5", parseLiteral("obligation(table_mediator,n5,informTangibleInteraction(SourceTable,TangibleObject,X,Y),"+Long.MAX_VALUE+")"), parseFormula("sai__event(tangibleInteraction(SourceTable,TangibleObject,X,Y,_)[sai__agent(_)])"),this.instProgram);
 			scope.addNorm(n5);
+			
+			
 
 			nengine.loadNP(scope);
+			
+			
+			
+
 
 			//nengine.loadNP(scope);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -484,45 +506,16 @@ public class SaiNplArt extends Artifact implements npl.NormativeListener  {
 	public void loadNplProgram(String fileName){
 		try {
 			NormativeProgram p = new NormativeProgram();
-			new nplp(new StringReader(getFileContent(fileName))).program(p, null);
+			//new nplp(new StringReader(getFileContent(fileName))).program(p, null);
+			nplp parser = new nplp(new FileInputStream(fileName));
+			parser.program(p, null);
 
-
-			//nengine.init();
-
-
-			//System.out.println(p.getRoot().toString());
 
 			scope = p.getRoot();
 			nengine.loadNP(scope);
-			//nengine.setScope(p.getRoot());
-			//System.out.println(">>>> " + nengine.getScope().toString());
-
-
-			/*
-			nengine.getAg().addBel(parseLiteral("scheme_id(s)"));
-			nengine.getAg().addBel(parseLiteral("responsible(gr,s)"));
-			nengine.getAg().addBel(parseLiteral("mplayers(management_of_house_building,s,v)"));
-			nengine.getAg().addBel(parseLiteral("fplay(a,house_owner,gr)"));
-			nengine.verifyNorms();
-			 */
-
-			/*
-			int i = 0;
-				while(nengine.getActiveObligations().size()<1){
-					//LogicalFormula formula = parseFormula("scheme_id(s) & responsible(gr,s) & mplayers(management_of_house_building,s,v) & fplay(a,house_owner,gr) & not mission_accomplished(s,management_of_house_building)");
-					LogicalFormula formula = parseFormula("scheme_id(s) ");
-					i++;
-					//if(i%1000==0)
-						System.out.println( i + "waiting... " + nengine.getAg().believes(formula, new Unifier()));
-				}	
-			//}
-
-			for(Literal l:nengine.getActiveObligations())
-				System.out.println("obl: " + l);
-
-			System.out.println("ok " + nengine.getActiveObligations().size());
-
-			 */
+			
+			
+			
 		} catch (IOException | npl.parser.ParseException  e) {
 			// TODO Auto-generated catch blocke
 			e.printStackTrace();
