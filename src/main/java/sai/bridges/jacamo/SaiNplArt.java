@@ -3,11 +3,6 @@ package sai.bridges.jacamo;
 import static jason.asSyntax.ASSyntax.createLiteral;
 import static jason.asSyntax.ASSyntax.parseFormula;
 import static jason.asSyntax.ASSyntax.parseLiteral;
-import jason.asSyntax.Literal;
-import jason.asSyntax.LiteralImpl;
-import jason.asSyntax.Pred;
-import jason.asSyntax.Structure;
-import jason.asSyntax.parser.ParseException;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -15,14 +10,31 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+
+import cartago.Artifact;
+import cartago.INTERNAL_OPERATION;
+import cartago.OPERATION;
+import cartago.OpFeedbackParam;
+import jason.asSyntax.Literal;
+import jason.asSyntax.LiteralImpl;
+import jason.asSyntax.Pred;
+import jason.asSyntax.Structure;
+import jason.asSyntax.parser.ParseException;
 import npl.DeonticModality;
 import npl.DynamicFactsProvider;
+import npl.INorm;
 import npl.LiteralFactory;
 import npl.NPLInterpreter;
 import npl.Norm;
@@ -30,12 +42,6 @@ import npl.NormativeProgram;
 import npl.Scope;
 import npl.TimeTerm;
 import npl.parser.nplp;
-
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-
 import sai.main.institution.INormativeEngine;
 import sai.main.institution.SaiEngine;
 import sai.main.lang.parser.sai_constitutiveLexer;
@@ -48,13 +54,6 @@ import sai.main.lang.semantics.statusFunction.StatusFunction;
 import sai.norms.npl.npl2sai.NormSai;
 import sai.norms.npl.npl2sai.Npl2Sai;
 import sai.util.SaiHttpServer;
-import cartago.Artifact;
-import cartago.INTERNAL_OPERATION;
-import cartago.OPERATION;
-import cartago.OpFeedbackParam;
-
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 
 /**
  * This artifact gives access to NPL engine coupled with SAI.
@@ -290,7 +289,7 @@ public class SaiNplArt extends Artifact implements npl.NormativeListener  {
 		@Override
 		public void handle(HttpExchange t) throws IOException {	
 			String response = "<html><font size=\"2\" face=\"arial\" color=\"green\">NPL Program</font><br><font size=\"2\" face=\"arial\">";
-			for(Norm n:scope.getNorms()){
+			for(INorm n:scope.getNorms()){
 				response = response + "-- " + n + "<br>";
 			}			
 			response = response + "<br><br>";
